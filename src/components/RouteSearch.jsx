@@ -29,8 +29,8 @@ const RouteSearch = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSearch}>
+    <div className="absolute top-0 left-0 z-10 h-screen bg-primary flex flex-col p-3">
+      <form onSubmit={handleSearch} className="flex justify-center gap-2 mt-6">
         <input
           type="text"
           value={searchText}
@@ -38,17 +38,22 @@ const RouteSearch = () => {
             setSearchText(e.target.value);
           }}
           placeholder="산책 루트 명을 입력하세요."
+          className="w-9/12 p-2 rounded-sm"
         />
-        <button type="submit"> 검색</button>
+        <button type="submit" className="p-2 rounded-sm  bg-secondary-100">
+          검색
+        </button>
       </form>
-      <div>
+      <div className="mt-10">
         {filteredRoutes.length > 0 ? (
           filteredRoutes.map((route) => (
-            <div key={route.id}>
-              <h3>{route.name}</h3>
-              <p>{route.description}</p>
-              <p>거리: {route.distance} km</p>
-              <p>시간: {route.time}</p>
+            <div key={route.id} className="bg-white rounded-md my-3">
+              <h3 className="font-bold p-3 text-lg text-left">{route.name}</h3>
+              <p className=" mb-2 p-3 text-left text-sm">{route.description}</p>
+              <div className="flex gap-5 p-5 bg-secondary-100 rounded-b-md">
+                <span>거리: {route.distance} km</span>
+                <span>시간: {route.time}</span>
+              </div>
             </div>
           ))
         ) : (

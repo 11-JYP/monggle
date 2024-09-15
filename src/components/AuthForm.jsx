@@ -3,7 +3,8 @@ import { useState } from "react";
 const AuthForm = ({ mode, onSubmit }) => {
   const [formData, setFormData] = useState({
     userId: "",
-    password: ""
+    password: "",
+    nickname: mode === "signup" ? "" : null
   });
 
   const handleChange = (e) => {
@@ -43,7 +44,17 @@ const AuthForm = ({ mode, onSubmit }) => {
         required
         className="w-56 p-3 m-3 border border-gray-300 rounded-lg"
       />
-
+      {mode === "signup" && (
+        <input
+          type="text"
+          name="nickname"
+          value={formData.nickname}
+          onChange={handleChange}
+          placeholder="닉네임"
+          required
+          className="w-56 p-3 m-3  border border-gray-300 rounded-lg"
+        />
+      )}
       <button
         type="submit"
         className="w-40 bg-primary hover:bg-secondary-100 text-white font-bold py-3 mt-5 rounded-full"

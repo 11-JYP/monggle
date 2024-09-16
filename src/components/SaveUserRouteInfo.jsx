@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import userRouteStore from '../zustand/userRouteStore';
-import routeDataStore from '../zustand/routeDataStore';
-import { createRouteInfo } from '../api/pathDataSave';
+import React, { useState } from "react";
+import userRouteStore from "../zustand/userRouteStore";
+import routeDataStore from "../zustand/routeDataStore";
+import { createRouteInfo } from "../api/pathDataSave";
 
 const SaveUserRouteInfo = () => {
   // const [routeName, setRouteName] = useState('');
@@ -40,10 +40,10 @@ const SaveUserRouteInfo = () => {
 
     try {
       await createRouteInfo(userRouteAllDate);
-      alert('루트정보저장완료!');
-      console.log('루트정보저장완료', userRouteAllDate);
+      alert("루트정보저장완료!");
+      console.log("루트정보저장완료", userRouteAllDate);
     } catch (error) {
-      console.error('루트정보저장에러', error);
+      console.error("루트정보저장에러", error);
     }
   };
 
@@ -52,10 +52,15 @@ const SaveUserRouteInfo = () => {
     <form onSubmit={handleRouteFormSubmit}>
       <div className="flex flex-col justify-center items-center gap-10 m-20">
         <div>
-          <h1>나만의 몽글로드 만들기</h1>
+          <h1 className="text-orange">나만의 몽글로드 만들기</h1>
         </div>
         <div className="flex flex-col gap-5">
-          <input value={routeName} placeholder="코스명을 입력하세요" onChange={handleRouteName} />
+          <input
+            value={routeName}
+            placeholder="코스명을 입력하세요"
+            onChange={handleRouteName}
+            className="text-text-color"
+          />
           <input value={address} placeholder="주소" onChange={handleSetAddress} />
           <textarea value={description} placeholder="코스를 설명해주세요" onChange={handleDescription} />
           <select value={selectedPuppy} onChange={handleSelectPuppy}>
@@ -77,7 +82,7 @@ const SaveUserRouteInfo = () => {
           </div>
         </div>
       </div>
-      <button>제출</button>
+      <button className="btn">제출</button>
     </form>
   );
 };

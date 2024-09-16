@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html,
+  body {
+    font-family: "sans-serif";
+    box-sizing: border-box;
+    color: #333;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply w-[320px] h-[60px] bg-[#FF7B00] rounded-lg text-white;
+  }
+}
+
 html,
 body,
 div,
@@ -119,7 +134,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 table {
@@ -127,13 +142,13 @@ table {
   border-spacing: 0;
 }
 
-// 경로 css
+/* 경로 css */
 .dot {
   overflow: hidden;
   float: left;
   width: 12px;
   height: 12px;
-  background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');
+  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png");
 }
 .dotOverlay {
   position: relative;
@@ -155,14 +170,14 @@ table {
   color: #ee6152;
 }
 .dotOverlay:after {
-  content: '';
+  content: "";
   position: absolute;
   margin-left: -6px;
   left: 50%;
   bottom: -8px;
   width: 11px;
   height: 8px;
-  background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png');
+  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png");
 }
 .distanceInfo {
   position: relative;

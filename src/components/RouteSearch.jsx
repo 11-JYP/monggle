@@ -1,10 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  EmailIcon
+} from "react-share";
 
 const RouteSearch = () => {
   const [routes, setRoutes] = useState([]); // 산책코스 배열 저장
   const [searchText, setSearchText] = useState(""); // 검색어 관리
   const [filteredRoutes, setFilteredRoutes] = useState([]); // 필터링 루트
+  const currentUrl = window.location.href;
 
   //루트 불러오는 로직
   useEffect(() => {
@@ -50,6 +59,18 @@ const RouteSearch = () => {
             <div key={route.id} className="bg-white rounded-md my-3">
               <h3 className="font-bold p-3 text-lg text-left">{route.name}</h3>
               <p className=" mb-2 p-3 text-left text-sm">{route.description}</p>
+              <div className="flex justify-start gap-2 w-10 ml-2 mb-4">
+                <FacebookShareButton url={currentUrl}>
+                  <FacebookIcon size={30} round={true} borderRadius={24}></FacebookIcon>
+                </FacebookShareButton>
+                <EmailShareButton url={currentUrl}>
+                  <EmailIcon size={30} round={true} borderRadius={24}></EmailIcon>
+                </EmailShareButton>
+                <TwitterShareButton url={currentUrl}>
+                  <TwitterIcon size={30} round={true} borderRadius={24}></TwitterIcon>
+                </TwitterShareButton>
+              </div>
+
               <div className="flex gap-5 p-5 bg-secondary-100 rounded-b-md">
                 <span>거리: {route.distance} km</span>
                 <span>시간: {route.time}</span>

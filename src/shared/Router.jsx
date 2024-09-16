@@ -1,13 +1,16 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
+import WalkPathPage from '../pages/WalkPathPage';
+import WalkPath from '../components/WalkPath';
+import SaveUserRouteInfo from '../components/SaveUserRouteInfo';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="myfeed" element={<></>} />
-        <Route path="mypage" element={<></>} />
+        <Route path="/walkpath" element={<WalkPathPage />} />
+        <Route path="/saveuserroute" element={<SaveUserRouteInfo />} />
         <Route path="signin" element={<></>} />
         <Route path="signup" element={<></>} />
       </Routes>

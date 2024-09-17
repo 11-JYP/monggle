@@ -19,10 +19,13 @@
     "html2canvas": "^1.4.1",
     "json-server": "^1.0.0-beta.2",
     "react": "^18.3.1",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.3.1",
     "react-kakao-maps-sdk": "^1.1.27",
     "react-router-dom": "^6.26.2",
-    "zustand": "^5.0.0-rc.2"
+    "react-share": "^5.1.0",
+    "styled-components": "^6.1.13",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

@@ -4,14 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        transparent: "transparent",
-        current: "currentColor",
-        white: "#ffffff",
-        orange: "#FF7B00",
-
-        // 텍스트 칼라
-        "text-color": "#666",
-        "subtext-color": "#999"
+        primary: "#EE8A2C",
+        secondary: {
+          100: "#FFDAB6"
+        }
+      },
+      fontFamily: {
+        body: ["Montserrat"]
       }
     }
   },

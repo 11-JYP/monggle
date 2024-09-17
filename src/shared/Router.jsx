@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
+// import WalkCourse from "../components/WalkCourse";
 import WalkPathPage from "../pages/WalkPathPage";
-import WalkPath from "../components/WalkPath";
-import SaveUserRouteInfo from "../components/SaveUserRouteInfo";
+import SaveUserRouteInfo from "../components/saveUserRouteInfo";
 
 const Router = () => {
   return (
@@ -10,7 +10,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/walkpath" element={<WalkPathPage />} />
-        {/* <Route path="/saveuserroute" element={<SaveUserRouteInfo />} /> */}
+        <Route path="/saveuserroute" element={<SaveUserRouteInfo />} />
         <Route path="signin" element={<></>} />
         <Route path="signup" element={<></>} />
       </Routes>

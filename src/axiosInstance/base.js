@@ -7,3 +7,6 @@ const routeInstance = axios.create({
 });
 
 export default routeInstance;
+
+// ** 하영 - db.json 목데이터로 작업할 때 쓴 것
+// 최종확인 후 불필요 시 삭제 가능

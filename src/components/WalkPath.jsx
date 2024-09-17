@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import { CustomOverlayMap, Map, DrawingManager } from "react-kakao-maps-sdk";
 import routeDataStore from "../zustand/routeDataStore";
+import useCurrentLocation from "../hooks/useCurrentLocation";
 
 // 경로 데이터 계산 ,저장 함수
 const useRouteData = (paths, distance) => {
@@ -31,6 +32,13 @@ const WalkPath = () => {
   // 경로 데이터 로직 사용
   useRouteData(paths, distance);
 
+  // 현재 위치 정보 가져오기
+  const { location, isLocationLoaded } = useCurrentLocation(); // 커스텀 훅에서 위치와 로딩 상태 가져오기
+
+  if (!isLocationLoaded) {
+    return <p>현재 위치를 불러오는 중...</p>; // 위치 정보가 로드될 때까지 대기
+  }
+
   // 선 그리기 모드 선택 함수
   const selectOverlay = () => {
     const manager = managerRef.current;
@@ -38,8 +46,8 @@ const WalkPath = () => {
     manager.select(window.kakao.maps.drawing.OverlayType.POLYLINE);
   };
 
-  // 그리기 완료 후 경로 데이터 계산 및 저장
-  const handleDrawComplete = useCallback(() => {
+  // 그리기 완료 후 경로 데이터 계산 및 저장 (useCallback 제거)
+  const handleDrawComplete = () => {
     const manager = managerRef.current;
     const overlayData = manager.getData();
 
@@ -59,9 +67,9 @@ const WalkPath = () => {
       setLastPosition(path[path.length - 1]);
       setIsDrawingComplete(true);
     }
-  }, []);
+  };
 
-  // Polyline 총 거리 계산 함수
+  // Polyline 총 거리 계산 함수 (useCallback 제거)
   const calculateTotalDistance = (path) => {
     if (path.length < 2) return 0;
 
@@ -74,15 +82,7 @@ const WalkPath = () => {
 
   return (
     <>
-      <Map
-        id="map"
-        center={{
-          lat: 37.498004414546934,
-          lng: 127.02770621963765
-        }}
-        style={{ width: "100%", height: "100vh" }}
-        level={3}
-      >
+      <Map id="map" center={location} style={{ width: "100%", height: "100vh" }} level={3}>
         <DrawingManager
           ref={managerRef}
           drawingMode={["polyline"]}

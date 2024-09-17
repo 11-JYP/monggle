@@ -1,8 +1,11 @@
 import userRouteStore from "../zustand/userRouteStore";
 import routeDataStore from "../zustand/routeDataStore";
 import { createRouteInfo } from "../api/pathDataSave";
+import { useNavigate } from "react-router-dom";
 
 const SaveUserRouteInfo = () => {
+  const navigate = useNavigate();
+
   // store에서 객체형태로 불러와서 한번에 넘겨버려
   const { routeName, address, description, selectedPuppy, setUserRouteData } = userRouteStore((state) => ({
     routeName: state.routeFormData.routeName,
@@ -46,6 +49,7 @@ const SaveUserRouteInfo = () => {
     try {
       await createRouteInfo(userRouteAllData);
       alert("루트 정보 저장 완료!");
+      navigate("/");
     } catch (error) {
       console.error("루트 정보 저장 에러", error);
     }

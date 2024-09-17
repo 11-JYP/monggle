@@ -15,6 +15,14 @@
   .btn {
     @apply w-[320px] h-[60px] bg-[#FF7B00] rounded-lg text-white;
   }
+
+  .sideContainer {
+    @apply w-[380px] h-full flex flex-col;
+  }
+
+  .navToggleBtn {
+    @apply h-[40px] px-[24px] bg-white rounded-full flex items-center justify-center shadow-lg;
+  }
 }
 
 html,

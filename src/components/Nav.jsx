@@ -6,7 +6,7 @@ const Nav = () => {
   return (
     <div className=" flex justify-between m-[16px]">
       <div className="flex gap-3">
-        <div className="navToggleBtn" onClick={navigate("/")}>
+        <div className="navToggleBtn" onClick={() => navigate("/")}>
           코스
         </div>
         <div className="navToggleBtn">애견카페</div>

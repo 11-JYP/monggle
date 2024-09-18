@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:4000/Route';
+const API_URL = "http://localhost:4000/Route";
 
 export const getRoute = async () => {
   const response = await axios.get(API_URL);

@@ -4,7 +4,7 @@ import useGeoLocationStore from "../zustand/geoLocationStore";
 import axios from "axios";
 import Nav from "./Nav";
 
-const MainPageMap = () => {
+const MainPageMap = ({ center }) => {
   const { geoLocationDataStore, getGeoLocation } = useGeoLocationStore();
   const [polygonPaths, setPolygonPaths] = useState([]);
   const [overlayPositions, setOverlayPositions] = useState([]);
@@ -43,7 +43,7 @@ const MainPageMap = () => {
   return (
     <>
       <div className="relative w-full h-screen">
-        <Map center={geoLocationDataStore.center} style={{ width: "100%", height: "100vh" }} level={3}>
+        <Map center={center || geoLocationDataStore.center} style={{ width: "100%", height: "100vh" }} level={3}>
           <div className="absolute top-0 left-0 z-10 p-4 w-full">
             <Nav />
           </div>

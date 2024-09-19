@@ -17,18 +17,11 @@ const SaveUserRouteInfo = () => {
 
   const routeData = routeDataStore((state) => state.routeData) || {}; // 초기값을 빈 객체로 설정
 
-  // 입력 값 변경 핸들러들
-  const handleRouteName = (e) => {
-    setUserRouteData({ routeName: e.target.value });
-  };
-  const handleSetAddress = (e) => {
-    setUserRouteData({ address: e.target.value });
-  };
-  const handleDescription = (e) => {
-    setUserRouteData({ description: e.target.value });
-  };
-  const handleSelectPuppy = (e) => {
-    setUserRouteData({ selectedPuppy: e.target.value });
+  // 입력 값 변경 핸들러
+  const handleInputChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUserRouteData({ [name]: value });
   };
 
   // 폼 제출 핸들러
@@ -62,16 +55,23 @@ const SaveUserRouteInfo = () => {
           <h1>나만의 몽글로드 만들기</h1>
         </div>
         <div className="flex flex-col gap-5">
-          <input value={routeName} placeholder="코스명을 입력하세요" onChange={handleRouteName} style={inputStyle} />
-          <input value={address} placeholder="주소" onChange={handleSetAddress} style={inputStyle} />
+          <input
+            value={routeName}
+            name="routeName"
+            placeholder="코스명을 입력하세요"
+            onChange={handleInputChange}
+            style={inputStyle}
+          />
+          <input value={address} name="address" placeholder="주소" onChange={handleInputChange} style={inputStyle} />
           <textarea
             value={description}
+            name="description"
             placeholder="코스를 설명해주세요"
-            onChange={handleDescription}
+            onChange={handleInputChange}
             maxLength={100}
             style={textAreaStyle}
           />
-          <select value={selectedPuppy} onChange={handleSelectPuppy}>
+          <select value={selectedPuppy} name="selectedPuppy" onChange={handleInputChange}>
             <option value="default" disabled>
               이런 강아지에게 추천해요
             </option>

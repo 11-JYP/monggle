@@ -4,8 +4,14 @@ import routeDataStore from "../zustand/routeDataStore";
 import useCurrentLocation from "../hooks/useCurrentLocation";
 import loadingImage from "../assets/loadingImage.png";
 
-// 경로 데이터 계산 및 저장 함수
-const useRouteData = (paths, distance) => {
+const WalkPath = () => {
+  const managerRef = useRef(null);
+  const [paths, setPaths] = useState([]);
+  const [distance, setDistance] = useState(0);
+  const [isDrawingComplete, setIsDrawingComplete] = useState(false);
+  const [lastPosition, setLastPosition] = useState(null);
+
+  // 경로 데이터 계산 및 저장 함수
   const setRouteData = routeDataStore((state) => state.setRouteData);
 
   useEffect(() => {
@@ -15,23 +21,12 @@ const useRouteData = (paths, distance) => {
 
       setRouteData({
         paths,
-        totalDistance, // 총 거리 저장
-        totalWalkkTime: walkTime // 계산된 걷는 시간 저장
+        totalDistance,
+        totalWalkkTime: walkTime
       });
       console.log("루트 데이터 저장 완료:", paths, totalDistance, walkTime);
     }
   }, [paths, distance, setRouteData]);
-};
-
-const WalkPath = () => {
-  const managerRef = useRef(null);
-  const [paths, setPaths] = useState([]);
-  const [distance, setDistance] = useState(0);
-  const [isDrawingComplete, setIsDrawingComplete] = useState(false);
-  const [lastPosition, setLastPosition] = useState(null);
-
-  // 경로 데이터 로직 사용
-  useRouteData(paths, distance);
 
   // 현재 위치 정보 가져오기
   const { location, isLocationLoaded } = useCurrentLocation();

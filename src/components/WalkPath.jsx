@@ -2,8 +2,9 @@ import { useEffect, useState, useRef } from "react";
 import { CustomOverlayMap, Map, DrawingManager } from "react-kakao-maps-sdk";
 import routeDataStore from "../zustand/routeDataStore";
 import useCurrentLocation from "../hooks/useCurrentLocation";
+import loadingImage from "../assets/loadingImage.png";
 
-// 경로 데이터 계산 ,저장 함수
+// 경로 데이터 계산 및 저장 함수
 const useRouteData = (paths, distance) => {
   const setRouteData = routeDataStore((state) => state.setRouteData);
 
@@ -33,10 +34,14 @@ const WalkPath = () => {
   useRouteData(paths, distance);
 
   // 현재 위치 정보 가져오기
-  const { location, isLocationLoaded } = useCurrentLocation(); // 커스텀 훅에서 위치와 로딩 상태 가져오기
+  const { location, isLocationLoaded } = useCurrentLocation();
 
   if (!isLocationLoaded) {
-    return <p>현재 위치를 불러오는 중...</p>; // 위치 정보가 로드될 때까지 대기
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "40%", height: "100vh" }}>
+        <img src={loadingImage} alt="현재 위치를 불러오는 중..." />
+      </div>
+    );
   }
 
   // 선 그리기 모드 선택 함수
@@ -46,7 +51,7 @@ const WalkPath = () => {
     manager.select(window.kakao.maps.drawing.OverlayType.POLYLINE);
   };
 
-  // 그리기 완료 후 경로 데이터 계산 및 저장 (useCallback 제거)
+  // 그리기 완료 후 경로 데이터 계산 및 저장
   const handleDrawComplete = () => {
     const manager = managerRef.current;
     const overlayData = manager.getData();
@@ -69,7 +74,7 @@ const WalkPath = () => {
     }
   };
 
-  // Polyline 총 거리 계산 함수 (useCallback 제거)
+  // Polyline 총 거리 계산 함수
   const calculateTotalDistance = (path) => {
     if (path.length < 2) return 0;
 
@@ -78,6 +83,24 @@ const WalkPath = () => {
     });
 
     return polyline.getLength();
+  };
+
+  // 다시 그리기 함수
+  const handleReset = () => {
+    setPaths([]);
+    setDistance(0);
+    setLastPosition(null);
+    setIsDrawingComplete(false);
+
+    routeDataStore.setState({
+      totalDistance: 0,
+      totalWalkkTime: 0
+    });
+
+    const manager = managerRef.current;
+    manager.clear(); // 지도에서 그린 모든 선 제거
+    manager.cancel(); // 기존 그리기 취소
+    selectOverlay(); // 새로운 그리기 모드 시작
   };
 
   return (
@@ -108,7 +131,7 @@ const WalkPath = () => {
 
         {isDrawingComplete && lastPosition && (
           <CustomOverlayMap position={lastPosition} yAnchor={1}>
-            <DistanceInfo distance={distance} />
+            <DistanceInfo distance={distance} handleReset={handleReset} />
           </CustomOverlayMap>
         )}
       </Map>
@@ -116,36 +139,38 @@ const WalkPath = () => {
   );
 };
 
-const DistanceInfo = ({ distance }) => {
+const DistanceInfo = ({ distance, handleReset }) => {
+  const displayDistance = `${Math.floor(distance)}m`;
+
   const walkTime = Math.floor(distance / 67);
   const bycicleTime = Math.floor(distance / 227);
 
   return (
     <ul className="dotOverlay distanceInfo" style={overlayStyle}>
       <li>
-        <span className="label">총 거리</span> <span className="number">{Math.floor(distance)}</span>m
+        <span className="label">총 거리</span> <span className="number">{displayDistance}</span>
       </li>
       <li>
         <span className="label">도보</span>
-        {walkTime > 60 && (
+        {walkTime > 60 ? (
           <>
             <span className="number">{Math.floor(walkTime / 60)}</span> 시간{" "}
           </>
-        )}
+        ) : null}
         <span className="number">{walkTime % 60}</span> 분
       </li>
       <li>
         <span className="label">자전거</span>
-        {bycicleTime > 60 && (
+        {bycicleTime > 60 ? (
           <>
             <span className="number">{Math.floor(bycicleTime / 60)}</span> 시간{" "}
           </>
-        )}
+        ) : null}
         <span className="number">{bycicleTime % 60}</span> 분
       </li>
       <li>
-        <button style={saveButtonStyle} onClick={() => alert("경로 저장 클릭")}>
-          경로 저장
+        <button style={resetButtonStyle} onClick={handleReset}>
+          다시 그리기
         </button>
       </li>
     </ul>
@@ -175,21 +200,21 @@ const completeButtonStyle = {
   backgroundColor: "#ff9672"
 };
 
-const overlayStyle = {
-  backgroundColor: "white",
-  padding: "10px"
-};
-
-const saveButtonStyle = {
+const resetButtonStyle = {
   display: "inline-block",
   width: "100px",
   height: "50px",
   margin: "10px auto",
-  backgroundColor: "#007bff",
+  backgroundColor: "#ff5c5c",
   color: "white",
   border: "none",
   borderRadius: "5px",
   cursor: "pointer"
+};
+
+const overlayStyle = {
+  backgroundColor: "white",
+  padding: "10px"
 };
 
 export default WalkPath;

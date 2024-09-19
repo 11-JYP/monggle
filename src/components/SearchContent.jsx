@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk";
-import SearchPagination from "./SearchPagination";
+import SearchList from "./SearchList";
 import CategorySearch from "./CategorySearch";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const { kakao } = window;
 
@@ -209,43 +210,16 @@ const SearchContent = () => {
 
   return (
     <div style={{ display: "flex" }}>
-      <div style={{ width: "30%", height: "100vh", backgroundColor: "orange", overflow: "scroll" }}>
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={keyword} onChange={(e) => setKeyword(e.target.value)} />
-          <button type="submit">검색</button>
-        </form>
-        <ul style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
-          {search.map((place, index) => (
-            <li
-              onClick={() => {
-                if (place.id === searchId) {
-                  setSearchId(null);
-                } else {
-                  setSearchId(place.id);
-                  moveLatLng(place);
-                }
-              }}
-              style={{ width: "80%", height: "5rem", backgroundColor: "white" }}
-              key={index}
-            >
-              <div>
-                <h5>{place.place_name}</h5>
-                <h5>{place.road_address_name}</h5>
-                <a href={place.place_url} target="_blank">
-                  홈페이지
-                </a>
-                <h5>{place.phone}</h5>
-              </div>
-            </li>
-          ))}
-        </ul>
-        {/* 페이지네이션을 표시하는 부분 */}
-        <SearchPagination
-          currentPage={pagination.current} // 현재 페이지 상태
-          lastPage={pagination.last} // 마지막 페이지 상태
-          onPageChange={pagination.gotoPage} // 페이지 전환 함수
-        />
-      </div>
+      <SearchList
+        handleSubmit={handleSubmit}
+        keyword={keyword}
+        setKeyword={setKeyword}
+        search={search}
+        pagination={pagination}
+        searchId={searchId}
+        setSearchId={setSearchId}
+        moveLatLng={moveLatLng}
+      />
       <div className="relative w-full h-screen">
         <Map
           center={state.center}
@@ -274,10 +248,10 @@ const SearchContent = () => {
                 key={data.id}
                 position={{ lat: data.y, lng: data.x }}
                 image={{
-                  src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png",
+                  src: logo,
                   size: {
-                    width: 35,
-                    height: 35
+                    width: 60,
+                    height: 60
                   }
                 }}
                 onClick={() => {

@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import useAuthStore from "../zustand/authStore";
 import { useEffect } from "react";
 
+import Modal from "./Modal";
+
 const Nav = () => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const modalBackground = useRef();
-  const { isAuthenticated, logout } = useAuthStore();
+  const { isAuthenticated, logout, user } = useAuthStore();
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("로그아웃 하시겠습니까?");
@@ -37,15 +39,23 @@ const Nav = () => {
         <div>
           {isAuthenticated ? (
             <>
-              <div>
-                <div className="navToggleBtn">마이페이지</div>
-              </div>
-              <div className="navToggleBtn" onClick={handleLogout}>
-                로그아웃
+              <div className="flex gap-2">
+                <div>
+                  <div className="navToggleBtn" onClick={() => setModalOpen(true)}>
+                    마이페이지
+                  </div>
+                </div>
+                <div className="navToggleBtn" onClick={handleLogout}>
+                  로그아웃
+                </div>
               </div>
             </>
           ) : (
-            <></>
+            <>
+              <div className="navToggleBtn" onClick={() => navigate("/login")}>
+                로그인
+              </div>
+            </>
           )}
         </div>
       </div>
@@ -60,12 +70,7 @@ const Nav = () => {
             }
           }}
         >
-          <div className="bg-white w-[500px] h-[600px] p-[20px]">
-            <button className={"modal-close-btn"} onClick={() => setModalOpen(false)}>
-              X
-            </button>
-            <p>마이페이지입니다</p>
-          </div>
+          <Modal user={user} onClose={() => setModalOpen(false)} />
         </div>
       )}
     </>

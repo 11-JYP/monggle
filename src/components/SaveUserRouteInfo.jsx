@@ -2,9 +2,12 @@ import userRouteStore from "../zustand/userRouteStore";
 import routeDataStore from "../zustand/routeDataStore";
 import { createRouteInfo } from "../api/pathDataSave";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../zustand/authStore";
 
 const SaveUserRouteInfo = () => {
   const navigate = useNavigate();
+
+  const { user } = useAuthStore();
 
   // store에서 객체형태로 불러와서 한번에 넘겨버려
   const { routeName, address, description, selectedPuppy, setUserRouteData } = userRouteStore((state) => ({
@@ -30,13 +33,15 @@ const SaveUserRouteInfo = () => {
 
     // 모든 입력 데이터를 하나로 통합하여 서버에 전송
     const userRouteAllData = {
+      id: user.id,
+      nickname: user.nickname,
       routeName,
       address,
       description,
       selectedPuppy,
       ...routeData // routeDataStore에서 가져온 경로 정보 추가
     };
-
+    console.log(user);
     console.log("제출할 데이터:", userRouteAllData); // 제출 전 확인
 
     try {

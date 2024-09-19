@@ -6,6 +6,7 @@ import Signup from "../pages/Signup";
 import Search from "../pages/Search";
 
 import ProtectedRoute from "../components/ProtectedRoute";
+import SampleProfile from "../pages/SampleProfile";
 
 const Router = () => {
   return (
@@ -16,6 +17,7 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/sample" element={<SampleProfile />} />
       </Routes>
     </BrowserRouter>
   );

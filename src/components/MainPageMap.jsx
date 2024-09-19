@@ -3,6 +3,7 @@ import { CustomOverlayMap, Map, Polygon } from "react-kakao-maps-sdk";
 import useGeoLocationStore from "../zustand/geoLocationStore";
 import axios from "axios";
 import Nav from "./Nav";
+import NavBottom from "./NavBottom";
 
 const MainPageMap = ({ center }) => {
   const { geoLocationDataStore, getGeoLocation } = useGeoLocationStore();
@@ -13,7 +14,7 @@ const MainPageMap = ({ center }) => {
   useEffect(() => {
     getGeoLocation(); // 페이지에서 위치 정보 가져오기
 
-    const API_URL = `http://localhost:4005/Route`; // 'localhost'로 수정
+    const API_URL = `http://localhost:4005/Route`;
 
     const getRouteData = async () => {
       try {
@@ -45,7 +46,12 @@ const MainPageMap = ({ center }) => {
       <div className="relative w-full h-screen">
         <Map center={center || geoLocationDataStore.center} style={{ width: "100%", height: "100vh" }} level={3}>
           <div className="absolute top-0 left-0 z-10 p-4 w-full">
-            <Nav />
+            <Nav className="w-full" />
+          </div>
+
+          {/* 하단에 NavBottom 컴포넌트 */}
+          <div className="absolute bottom-0 right-0 z-10 p-4 w-full">
+            <NavBottom className="w-full" />
           </div>
           {polygonPaths.map((path, index) => (
             <div key={index}>

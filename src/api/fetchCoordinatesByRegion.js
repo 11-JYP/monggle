@@ -1,3 +1,4 @@
+// 지역으로 검색
 const fetchCoordinatesByRegion = (regionName) => {
   return new Promise((resolve, reject) => {
     if (window.kakao && window.kakao.maps.services) {

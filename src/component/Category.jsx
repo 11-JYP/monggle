@@ -37,7 +37,7 @@ const Category = () => {
   const [clickKeyword, setClickKeyword] = useState('');
   //민지님 코드
   /** 검색 결과 */
-  const [places, setPlaces] = useState([]);
+  // const [places, setPlaces] = useState([]);
 
   /** 검색 키워드 */
   const [keyword, setKeyword] = useState('');
@@ -76,60 +76,14 @@ const Category = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (!map) return;
-
-  //   const ps = new kakao.maps.services.Places();
-
-  //   var searchOptions = {
-  //     location: coordinate,
-  //     radius: 10000,
-  //     sort: kakao.maps.services.SortBy.DISTANCE
-  //   };
-
-  //   const placeSearch = (data, status, pagination) => {
-  //     // console.log('pagination :>> ', pagination);
-
-  //     if (status === kakao.maps.services.Status.OK) {
-  //       const bounds = new kakao.maps.LatLngBounds();
-  //       let markers = [];
-
-  //       setPlaces(data);
-
-  //       for (var i = 0; i < data.length; i++) {
-  //         markers.push({
-  //           position: {
-  //             lat: data[i].y,
-  //             lng: data[i].x
-  //           },
-  //           content: data[i].place_name
-  //         });
-
-  //         bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-  //       }
-  //       setMarkers(markers);
-  //       // 검색된 장소 위치를 기준으로 지도 범위를 재설정
-  //       map.setBounds(bounds);
-
-  //       // 페이지네이션 객체 저장
-  //       setPagination({
-  //         current: pagination.current,
-  //         last: pagination.last,
-  //         gotoPage: (page) => pagination.gotoPage(page)
-  //       });
-  //     }
-  //   };
-
-  //   ps.keywordSearch('동물병원', placeSearch, searchOptions);
-  // }, [map]);
-
   /** 사용자 검색 */
   const searchKeyword = () => {
     const places = new kakao.maps.services.Places();
 
     const placeSearch = (data, status, pagination) => {
       if (status === kakao.maps.services.Status.OK) {
-        setPlaces(data);
+        // setPlaces(data);
+        setSearch(data);
         displayPlaces(data); // TODO 변경사항
 
         // 페이지네이션 객체 저장
@@ -165,7 +119,8 @@ const Category = () => {
       categoryKeyword,
       (data, status, categorypagination) => {
         if (status === kakao.maps.services.Status.OK) {
-          setPlaces(data);
+          // setPlaces(data);
+          setSearch(data);
           displayPlaces(data);
           const bounds = new kakao.maps.LatLngBounds();
           data.forEach((item) => bounds.extend(new kakao.maps.LatLng(item.y, item.x)));
@@ -194,6 +149,7 @@ const Category = () => {
     bounds.extend(new kakao.maps.LatLng(state.center.lat, state.center.lng));
     map.setBounds(bounds);
     setSearch(data);
+
     console.log(data);
   };
 
@@ -255,16 +211,15 @@ const Category = () => {
           <button type="submit">검색</button>
         </form>
         <ul style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
-          {places.map((place, index) => (
+          {search.map((place, index) => (
             <li
               onClick={() => {
-                setInfo({
-                  position: {
-                    lat: place.y,
-                    lng: place.x
-                  },
-                  content: place.place_name
-                });
+                if (place.id === searchId) {
+                  setSearchId(null);
+                } else {
+                  setSearchId(place.id);
+                  moveLatLng(place);
+                }
               }}
               style={{ width: '80%', height: '5rem', backgroundColor: 'white' }}
               key={index}
@@ -293,25 +248,6 @@ const Category = () => {
         level={3}
         onCreate={setMap}
       >
-        {/* <MapMarker
-          position={state.center}
-          image={{
-            src: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
-            size: {
-              width: 50,
-              height: 50
-            }
-          }}
-        /> */}
-        {/* {markers.map((marker) => (
-          <MapMarker
-            key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-            position={marker.position}
-            onClick={() => setInfo(marker)}
-          >
-            {info && info.content === marker.content && <div style={{ color: '#000' }}>{marker.content}</div>}
-          </MapMarker>
-        ))} */}
         <button onClick={handleReSearch}>현재 위치에서 검색</button>
         {search.map((data) => (
           <React.Fragment key={data.id}>

@@ -6,30 +6,13 @@ import { useNavigate } from "react-router-dom";
 const SaveUserRouteInfo = () => {
   const navigate = useNavigate();
 
-  // store에서 객체형태로 불러와서 한번에 넘겨버려
-  const { routeName, address, description, selectedPuppy, setUserRouteData } = userRouteStore((state) => ({
-    routeName: state.routeFormData.routeName,
-    address: state.routeFormData.address,
-    description: state.routeFormData.description,
-    selectedPuppy: state.routeFormData.selectedPuppy,
-    setUserRouteData: state.setUserRouteData
-  }));
+  const routeName = userRouteStore((state) => state.routeFormData.routeName);
+  const address = userRouteStore((state) => state.routeFormData.address);
+  const description = userRouteStore((state) => state.routeFormData.description);
+  const selectedPuppy = userRouteStore((state) => state.routeFormData.selectedPuppy);
+  const setUserRouteData = userRouteStore((state) => state.setUserRouteData);
 
   const routeData = routeDataStore((state) => state.routeData) || {}; // 초기값을 빈 객체로 설정
-
-  // 입력 값 변경 핸들러들
-  // const handleRouteName = (e) => {
-  //   setUserRouteData({ routeName: e.target.value });
-  // };
-  // const handleSetAddress = (e) => {
-  //   setUserRouteData({ address: e.target.value });
-  // };
-  // const handleDescription = (e) => {
-  //   setUserRouteData({ description: e.target.value });
-  // };
-  // const handleSelectPuppy = (e) => {
-  //   setUserRouteData({ selectedPuppy: e.target.value });
-  // };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -69,21 +52,21 @@ const SaveUserRouteInfo = () => {
         <div className="flex flex-col gap-5">
           <input
             value={routeName}
-            name={routeName}
-            aplaceholder="코스명을 입력하세요"
-            onChange={handleRouteName}
+            name="routeName"
+            placeholder="코스명을 입력하세요"
+            onChange={handleInputChange}
             style={inputStyle}
           />
-          <input value={address} name={address} placeholder="주소" onChange={handleSetAddress} style={inputStyle} />
+          <input value={address} name="address" placeholder="주소" onChange={handleInputChange} style={inputStyle} />
           <textarea
             value={description}
-            name={description}
+            name="description"
             placeholder="코스를 설명해주세요"
-            onChange={handleDescription}
+            onChange={handleInputChange}
             maxLength={100}
             style={textAreaStyle}
           />
-          <select value={selectedPuppy} name={selectedPuppy} onChange={handleSelectPuppy}>
+          <select value={selectedPuppy} name="selectedPuppy" onChange={handleInputChange}>
             <option value="default" disabled>
               이런 강아지에게 추천해요
             </option>

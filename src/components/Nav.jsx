@@ -17,6 +17,12 @@ const Nav = () => {
         <div>
           <div className="navToggleBtn">마이페이지</div>
         </div>
+<<<<<<< HEAD
+=======
+        <div className="navToggleBtn" onClick={() => navigate("/search")}>
+          검색하기
+        </div>
+>>>>>>> 1787358fa6e7fe727536e12645685ebc3612cf04
       </div>
     </>
   );

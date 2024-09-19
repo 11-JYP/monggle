@@ -1,8 +1,8 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '../pages/Home';
-import WalkPathPage from '../pages/WalkPathPage';
-import WalkPath from '../components/WalkPath';
-import SaveUserRouteInfo from '../components/SaveUserRouteInfo';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "../pages/Home";
+// import WalkCourse from "../components/WalkCourse";
+import WalkPathPage from "../pages/WalkPathPage";
+import SaveUserRouteInfo from "../components/SaveUserRouteInfo";
 
 const Router = () => {
   return (

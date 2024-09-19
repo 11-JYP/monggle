@@ -1,6 +1,5 @@
-import React from 'react';
-import WalkPath from '../components/WalkPath';
-import SaveUserRouteInfo from '../components/saveUserRouteInfo';
+import SaveUserRouteInfo from "../components/SaveUserRouteInfo";
+import WalkPath from "../components/WalkPath";
 
 const WalkPathPage = () => {
   return (

@@ -69,7 +69,7 @@ const MainPageSide = ({ updateMapCenter }) => {
                 type="button"
                 className={`px-4 py-2 rounded-md border font-semibold ${
                   searchType === "routeName"
-                    ? "bg-orange-500 text-white border-orange-500"
+                    ? "bg-[orange] text-white border-[orange]"
                     : "bg-gray-200 text-gray-700 border-gray-300"
                 }`}
                 onClick={() => setSearchType("routeName")}

@@ -6,7 +6,8 @@ export default {
       colors: {
         primary: "#EE8A2C",
         secondary: {
-          100: "#FFDAB6"
+          100: "#FFDAB6",
+          orange: "#FF7B00"
         }
       },
       fontFamily: {

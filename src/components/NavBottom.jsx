@@ -1,4 +1,5 @@
 import useGeoLocationStore from "../zustand/geoLocationStore";
+import targetImg from "../assets/target-icon.png"; // 상대 경로로 이미지 import
 
 const NavBottom = () => {
   const { getGeoLocation } = useGeoLocationStore();
@@ -10,8 +11,11 @@ const NavBottom = () => {
   return (
     <>
       <div className="flex justify-end m-[16px]">
-        <button onClick={nowLocation} className="navToggleBtn">
-          현 위치
+        <button
+          onClick={nowLocation}
+          className="w-[50px] h-[50px] bg-white rounded-full p-[10px] shadow hover:bg-[orange] transition duration-200 ease-in-out flex justify-center items-center"
+        >
+          <img src={targetImg} alt="target" className="w-full h-full" />
         </button>
       </div>
     </>

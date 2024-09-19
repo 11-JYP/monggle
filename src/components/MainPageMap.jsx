@@ -61,7 +61,6 @@ const MainPageMap = ({ center }) => {
             <Nav className="w-full" />
           </div>
 
-          {/* 하단에 NavBottom 컴포넌트 */}
           <div className="absolute bottom-0 right-0 z-10 p-4 w-full">
             <NavBottom className="w-full" />
           </div>

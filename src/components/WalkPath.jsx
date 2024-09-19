@@ -30,6 +30,23 @@ const WalkPath = () => {
   const [isDrawingComplete, setIsDrawingComplete] = useState(false);
   const [lastPosition, setLastPosition] = useState(null);
 
+  useEffect(() => {
+    // esc로 선 그리기 취소
+    const handleInfoReset = (e) => {
+      if (e.key === "Escape") {
+        const manager = managerRef.current;
+        manager.cancel();
+        setLastPosition(null);
+        setPaths([]);
+        setDistance(0);
+      }
+    };
+    window.addEventListener("keydown", handleInfoReset);
+    return () => {
+      window.removeEventListener("keydown", handleInfoReset);
+    };
+  }, []);
+
   // 경로 데이터 로직 사용
   useRouteData(paths, distance);
 

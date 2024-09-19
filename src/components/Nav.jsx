@@ -9,9 +9,9 @@ const Nav = () => {
         <div className="navToggleBtn" onClick={() => navigate("/")}>
           코스
         </div>
-        <div className="navToggleBtn">애견카페</div>
-        <div className="navToggleBtn">동물병원</div>
-        <div className="navToggleBtn">애견호텔</div>
+        <div className="navToggleBtn" onClick={() => navigate("/search")}>
+          검색하기
+        </div>
       </div>
       <div>
         <div className="navToggleBtn">마이페이지</div>

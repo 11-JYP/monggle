@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { CustomOverlayMap, Map, DrawingManager } from "react-kakao-maps-sdk";
 import routeDataStore from "../zustand/routeDataStore";
 import useCurrentLocation from "../hooks/useCurrentLocation";
+import loadingImage from "../assets/loadingImage.png";
 
 // 경로 데이터 계산 및 저장 함수
 const useRouteData = (paths, distance) => {
@@ -36,7 +37,11 @@ const WalkPath = () => {
   const { location, isLocationLoaded } = useCurrentLocation();
 
   if (!isLocationLoaded) {
-    return <p>현재 위치를 불러오는 중...</p>;
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "40%", height: "100vh" }}>
+        <img src={loadingImage} alt="현재 위치를 불러오는 중..." />
+      </div>
+    );
   }
 
   // 선 그리기 모드 선택 함수

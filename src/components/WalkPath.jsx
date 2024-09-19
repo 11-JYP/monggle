@@ -12,26 +12,21 @@ const WalkPath = () => {
   const [lastPosition, setLastPosition] = useState(null);
 
   // 경로 데이터 계산 및 저장 함수
-  const useRouteData = (paths, distance) => {
-    const setRouteData = routeDataStore((state) => state.setRouteData);
+  const setRouteData = routeDataStore((state) => state.setRouteData);
 
-    useEffect(() => {
-      if (paths.length > 0 && distance > 0) {
-        const walkTime = Math.floor(distance / 67);
-        const totalDistance = distance;
+  useEffect(() => {
+    if (paths.length > 0 && distance > 0) {
+      const walkTime = Math.floor(distance / 67);
+      const totalDistance = distance;
 
-        setRouteData({
-          paths,
-          totalDistance, // 총 거리 저장
-          totalWalkkTime: walkTime // 계산된 걷는 시간 저장
-        });
-        console.log("루트 데이터 저장 완료:", paths, totalDistance, walkTime);
-      }
-    }, [paths, distance, setRouteData]);
-  };
-
-  // 경로 데이터 로직 사용
-  useRouteData(paths, distance);
+      setRouteData({
+        paths,
+        totalDistance,
+        totalWalkkTime: walkTime
+      });
+      console.log("루트 데이터 저장 완료:", paths, totalDistance, walkTime);
+    }
+  }, [paths, distance, setRouteData]);
 
   // 현재 위치 정보 가져오기
   const { location, isLocationLoaded } = useCurrentLocation();

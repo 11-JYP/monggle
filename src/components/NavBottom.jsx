@@ -4,8 +4,7 @@ const NavBottom = () => {
   const { getGeoLocation } = useGeoLocationStore();
 
   const nowLocation = () => {
-    console.log("Button clicked, fetching location...");
-    getGeoLocation(); // 현재 위치를 가져오는 함수 호출
+    getGeoLocation();
   };
 
   return (

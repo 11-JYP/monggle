@@ -1,5 +1,5 @@
 import { useState } from "react";
-import MainPageSide from "../components/MainPageSide";
+import MainPageSide from "../components/MainPageSide"; // 가정: MainPageSide 컴포넌트 import
 import MainPageMap from "../components/MainPageMap";
 
 const MainPage = () => {

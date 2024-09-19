@@ -6,7 +6,7 @@ import Nav from "./Nav";
 import NavBottom from "./NavBottom";
 
 const MainPageMap = ({ center }) => {
-  const { geoLocationDataStore, getGeoLocation } = useGeoLocationStore();
+  const { geoLocationDataStore, getGeoLocation, setGeoLocation } = useGeoLocationStore();
   const [polygonPaths, setPolygonPaths] = useState([]);
   const [overlayPositions, setOverlayPositions] = useState([]);
   const [routeNames, setRouteNames] = useState([]);
@@ -41,10 +41,22 @@ const MainPageMap = ({ center }) => {
     getRouteData();
   }, [getGeoLocation]);
 
+  const handleMapDragEnd = (map) => {
+    const lat = map.getCenter().getLat();
+    const lng = map.getCenter().getLng();
+
+    setGeoLocation({ lat, lng });
+  };
+
   return (
     <>
       <div className="relative w-full h-screen">
-        <Map center={center || geoLocationDataStore.center} style={{ width: "100%", height: "100vh" }} level={3}>
+        <Map
+          center={center || geoLocationDataStore.center}
+          style={{ width: "100%", height: "100vh" }}
+          level={3}
+          onDragEnd={handleMapDragEnd}
+        >
           <div className="absolute top-0 left-0 z-10 p-4 w-full">
             <Nav className="w-full" />
           </div>

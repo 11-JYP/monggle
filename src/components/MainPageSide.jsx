@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import fetchCoordinatesByRegion from "../api/fetchCoordinatesByRegion";
+import { useNavigate } from "react-router-dom";
 
 const MainPageSide = ({ updateMapCenter }) => {
+  const navigate = useNavigate();
+
   const [routesInfo, setRoutesInfo] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [filteredRoutesInfo, setFilteredRoutesInfo] = useState([]);
-  const [searchType, setSearchType] = useState("routeName"); // State to differentiate between route and region search
-
+  const [searchType, setSearchType] = useState("routeName");
   useEffect(() => {
     const getRoutesInfo = async () => {
       try {
@@ -47,7 +49,20 @@ const MainPageSide = ({ updateMapCenter }) => {
     <>
       <div className="sideContainer">
         <div className="flex flex-col justify-center items-center gap-10 m-[20px]">
+          <div>
+            <img src="/" />
+          </div>
           <h1 className="text-orange">몽글로드</h1>
+
+          <button
+            className="w-full h-[40px] bg-[orange]"
+            onClick={() => {
+              navigate("/walkpath");
+            }}
+          >
+            산책로 만들기
+          </button>
+
           <form onSubmit={handleSearchSubmit} className="w-full">
             <div className="flex gap-4 mb-4">
               <button
@@ -97,7 +112,7 @@ const MainPageSide = ({ updateMapCenter }) => {
                 <div>{info.routeName}</div>
                 <div>{info.address}</div>
                 <div>{info.description}</div>
-                <div>{info.region}</div> {/* Display region or any other field */}
+                <div>{info.region}</div>
               </div>
             );
           })}

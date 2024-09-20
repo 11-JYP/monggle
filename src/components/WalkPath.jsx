@@ -32,10 +32,6 @@ const WalkPath = () => {
   const [lastPosition, setLastPosition] = useState(null);
   const setRouteData = routeDataStore((state) => state.setRouteData);
 
-  const { selectedLineColor } = userRouteStore((state) => ({
-    selectedLineColor: state.routeFormData.selectedLineColor
-  }));
-
   useEffect(() => {
     // 페이지 로드 시 정보 리셋
     setRouteData({});
@@ -148,10 +144,9 @@ const WalkPath = () => {
   };
 
   return (
-    <>
+    <div className="relative w-full h-screen">
       <Map id="map" center={location} style={{ width: "100%", height: "100vh" }} level={3}>
         <DrawingManager
-          key={selectedLineColor}
           ref={managerRef}
           drawingMode={["polyline"]}
           guideTooltip={["draw", "drag", "edit"]}
@@ -159,7 +154,7 @@ const WalkPath = () => {
             draggable: true,
             removable: true,
             editable: true,
-            strokeColor: selectedLineColor ? selectedLineColor : "#FF7F50",
+            strokeColor: "#FF7F50",
             hintStrokeStyle: "dash",
             hintStrokeOpacity: 0.5
           }}
@@ -180,7 +175,7 @@ const WalkPath = () => {
           </CustomOverlayMap>
         )}
       </Map>
-    </>
+    </div>
   );
 };
 

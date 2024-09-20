@@ -31,6 +31,11 @@ const WalkPath = () => {
   const [lastPosition, setLastPosition] = useState(null);
   const setRouteData = routeDataStore((state) => state.setRouteData);
 
+  useEffect(() => {
+    // 페이지 로드 시 정보 리셋
+    setRouteData({});
+  }, [setRouteData]);
+
   // 선 그리기 모드 선택 함수
   const selectOverlay = () => {
     const manager = managerRef.current;
@@ -39,7 +44,7 @@ const WalkPath = () => {
   };
 
   useEffect(() => {
-    //Esc로 선 그리기 취소
+    // Esc로 선 그리기 취소
     const handleInfoReset = (e) => {
       const manager = managerRef.current;
       if (e.key === "Escape") {

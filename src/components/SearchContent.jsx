@@ -4,6 +4,7 @@ import SearchList from "./SearchList";
 import CategorySearch from "./CategorySearch";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import useCurrentLocation from "../hooks/useCurrentLocation";
 
 const { kakao } = window;
 
@@ -19,62 +20,74 @@ const SearchContent = () => {
     center: {
       lat: 33.450701,
       lng: 126.570667
-    },
-    errMsg: null,
-    isLoading: true
+    }
   });
 
   const [map, setMap] = useState(null);
   const [search, setSearch] = useState([]);
   const [categoryKeyword, setCategoryKeyword] = useState("애견카페");
-  const [categorypagination, setCategoryPagination] = useState(null);
   const [searchId, setSearchId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastCenter, setLastCenter] = useState(null);
 
-  const [info, setInfo] = useState();
-  const [markers, setMarkers] = useState([]);
-
-  const [clickKeyword, setClickKeyword] = useState("");
+  const [clickKeyword, setClickKeyword] = useState("애견카페");
 
   /** 검색 키워드 */
   const [keyword, setKeyword] = useState("");
-
   const [pagination, setPagination] = useState({ current: 1, last: 1, gotoPage: () => {} });
 
   const navigate = useNavigate();
 
+  // 현재 위치 정보 가져오기
+  const { location, isLocationLoaded } = useCurrentLocation();
+
   useEffect(() => {
-    if (navigator.geolocation) {
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setState((prev) => ({
-            ...prev,
-            center: {
-              lat: position.coords.latitude, // 위도
-              lng: position.coords.longitude // 경도
-            },
-            isLoading: false
-          }));
-        },
-        (err) => {
-          setState((prev) => ({
-            ...prev,
-            errMsg: err.message,
-            isLoading: false
-          }));
+    if (isLocationLoaded) {
+      setState({
+        center: {
+          lat: location.lat,
+          lng: location.lng
         }
-      );
-    } else {
-      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-      setState((prev) => ({
-        ...prev,
-        errMsg: "geolocation을 사용할수 없어요..",
-        isLoading: false
-      }));
+      });
+
+      // TODO 중복코드를 어떻게 해결할까
+      const places = new kakao.maps.services.Places();
+
+      const options = {
+        location: new kakao.maps.LatLng(location.lat, location.lng),
+        radius: 5000,
+        sort: kakao.maps.services.SortBy.DISTANCE
+      };
+
+      const placeSearch = (data, status, pagination) => {
+        if (status === kakao.maps.services.Status.OK) {
+          setSearch(data);
+          displayPlaces(data);
+          const bounds = new kakao.maps.LatLngBounds();
+          data.forEach((item) => bounds.extend(new kakao.maps.LatLng(item.y, item.x)));
+          map.setBounds(bounds);
+
+          console.log("dddd location.lat :>> ", location.lat);
+
+          // 검색 기준 현재 위치 last좌표 저장
+          const centerLatLng = map.getCenter();
+          const newCenter = {
+            lat: location.lat,
+            lng: location.lng
+          };
+          setLastCenter(newCenter);
+          // 페이지네이션 객체 저장
+          setPagination({
+            current: pagination.current,
+            last: pagination.last,
+            gotoPage: (page) => pagination.gotoPage(page)
+          });
+        }
+      };
+
+      places.keywordSearch(`애견카페`, placeSearch, options);
     }
-  }, []);
+  }, [isLocationLoaded]);
 
   /** 사용자 검색 */
   const searchKeyword = () => {
@@ -82,19 +95,12 @@ const SearchContent = () => {
 
     const placeSearch = (data, status, pagination) => {
       if (status === kakao.maps.services.Status.OK) {
+        // setPlaces(data);
         setSearch(data);
-        displayPlaces(data); // TODO 변경사항
+        displayPlaces(data);
         const bounds = new kakao.maps.LatLngBounds();
         data.forEach((item) => bounds.extend(new kakao.maps.LatLng(item.y, item.x)));
         map.setBounds(bounds);
-
-        // 검색 기준 현재 위치 last좌표 저장
-        const centerLatLng = map.getCenter();
-        const newCenter = {
-          lat: centerLatLng.getLat(),
-          lng: centerLatLng.getLng()
-        };
-        setLastCenter(newCenter);
         // 페이지네이션 객체 저장
         setPagination({
           current: pagination.current,
@@ -111,6 +117,7 @@ const SearchContent = () => {
     e.preventDefault();
     searchKeyword();
   };
+  //민지님 코드
 
   const searchPlaces = (center, page) => {
     if (!state.center) return;
@@ -127,11 +134,13 @@ const SearchContent = () => {
       categoryKeyword,
       (data, status, categorypagination) => {
         if (status === kakao.maps.services.Status.OK) {
+          // setPlaces(data);
           setSearch(data);
           displayPlaces(data);
           const bounds = new kakao.maps.LatLngBounds();
           data.forEach((item) => bounds.extend(new kakao.maps.LatLng(item.y, item.x)));
           map.setBounds(bounds);
+          // setCategoryPagination(categorypagination);
 
           // 페이지네이션 객체 저장
           setPagination({
@@ -173,6 +182,8 @@ const SearchContent = () => {
       lat: centerLatLng.getLat(),
       lng: centerLatLng.getLng()
     };
+    console.log(centerLatLng);
+    console.log(newCenter);
     setCurrentPage(1);
     searchPlaces(newCenter, 1);
     setLastCenter(newCenter);
@@ -193,9 +204,13 @@ const SearchContent = () => {
     setSearchId(null);
     if (lastCenter) {
       searchPlaces(lastCenter, currentPage);
-    } else {
-      searchPlaces(state.center, currentPage);
     }
+    // else {
+    //   console.log("22222");
+
+    //   console.log("search :>> ", search);
+    //   searchPlaces(state.center, currentPage);
+    // }
   }, [map, categoryKeyword, currentPage]);
 
   useEffect(() => {
@@ -237,7 +252,6 @@ const SearchContent = () => {
             </button>
             {KEYWORD_LIST.map((keyword) => (
               <CategorySearch
-                key={keyword.id}
                 keyword={keyword}
                 setClickKeyword={setClickKeyword}
                 handleKeywordSelect={handleKeywordSelect}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getRouteInfo } from "../api/pathDataSave";
+import CanvasComponent from "../pages/CanvasComponent";
 
 const Modal = ({ user, onClose }) => {
   const [userRoutes, setUserRoutes] = useState([]); // 사용자 경로 상태
@@ -28,33 +29,33 @@ const Modal = ({ user, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
-      <div className="bg-white p-4 rounded w-[600px] h-[500px]">
+      <div className="bg-white p-4 rounded w-[800px] h-[500px] px-10">
         <button onClick={onClose} className="flex items-center justify-center ">
           X
         </button>
         <div className="flex flex-col items-center justify-center">
-          <h3 className="pt-5 text-[24px]">{user.nickname}님 안녕하세요</h3>
+          <h3 className="pt-10 text-[28px]">"{user.nickname}"님 안녕하세요</h3>
         </div>
-        <div className="pt-10">{user.id}님께서 그린 몽글로드입니다.</div>
-        <>
-          <div>
+        <div className="pt-20 text-[18px]">{user.nickname}님께서 그린 몽글로드입니다.</div>
+        <div className="pt-10 overflow-x-scroll overflow-y-hidden">
+          <div className="flex gap-4 whitespace-nowrap">
             {userRoutes.length > 0 ? (
-              <ul>
-                {userRoutes.map((route) => (
-                  <li key={route.id}>
-                    <h3>{route.routeName}</h3>
-                    <p>주소: {route.address}</p>
-                    <p>설명: {route.description}</p>
-                    <p>추천 강아지: {route.selectedPuppy}</p>
-                    {/* 필요한 다른 정보도 추가 가능 */}
-                  </li>
-                ))}
-              </ul>
+              userRoutes.map((route) => (
+                <div key={route.id} className="relative inline-block">
+                  <div className="absolute bottom-0 left-0 p-2 bg-white bg-opacity-70 w-full">
+                    <h3 className="pt-1">{route.routeName}</h3>
+                    <p>{route.description}</p>
+                  </div>
+                  <div className="bg-[orange]">
+                    <CanvasComponent size={200} coordinates={route.paths} /> {/* 크기를 200px로 설정 */}
+                  </div>
+                </div>
+              ))
             ) : (
               <p>저장된 경로가 없습니다.</p>
             )}
           </div>
-        </>
+        </div>
       </div>
     </div>
   );

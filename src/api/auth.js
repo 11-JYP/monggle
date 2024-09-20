@@ -13,7 +13,6 @@ export const login = async (userData) => {
 };
 
 export const getUserProfile = async (token) => {
-  // console.log("token 확인 =>>", token);
   const response = await baseInstance.get("/user", {
     headers: {
       "Content-Type": "application/json",

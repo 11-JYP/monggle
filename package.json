@@ -26,6 +26,7 @@
     "react-router-dom": "^6.26.2",
     "react-share": "^5.1.0",
     "styled-components": "^6.1.13",
+    "styled-reset": "^4.5.2",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

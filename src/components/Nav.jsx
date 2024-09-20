@@ -29,11 +29,11 @@ const Nav = () => {
     <>
       <div className=" flex justify-between m-[16px]">
         <div className="flex gap-3">
-          <div className="navToggleBtn" onClick={() => navigate("/main")}>
-            코스
+          <div className="navToggleBtn font-gowun" onClick={() => navigate("/main")}>
+            asdfasfasdf
           </div>
           <div className="navToggleBtn" onClick={() => navigate("/search")}>
-            검색하기
+            df
           </div>
         </div>
         <div>

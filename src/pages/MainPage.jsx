@@ -10,7 +10,7 @@ const MainPage = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex " style={{ width: "100%", height: "100vh" }}>
       <MainPageSide updateMapCenter={updateMapCenter} />
       <MainPageMap center={mapCenter} />
     </div>

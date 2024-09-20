@@ -13,7 +13,7 @@ const MainPageSide = ({ updateMapCenter }) => {
 
   // 페이지네이션 상태
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2; // 한 페이지에 보여줄 항목 수
+  const itemsPerPage = 5; // 한 페이지에 보여줄 항목 수
 
   useEffect(() => {
     const getRoutesInfo = async () => {
@@ -134,7 +134,7 @@ const MainPageSide = ({ updateMapCenter }) => {
         </form>
       </div>
 
-      <div className="mt-2">
+      <div className="mt-2 overflow-y-auto h-[100vh]">
         {currentItems.length > 0 ? (
           currentItems.map((info) => (
             <div
@@ -157,7 +157,7 @@ const MainPageSide = ({ updateMapCenter }) => {
         )}
       </div>
 
-      <div className="flex justify-center mt-4">{renderPageNumbers()}</div>
+      <div className="flex justify-center my-4">{renderPageNumbers()}</div>
     </div>
   );
 };

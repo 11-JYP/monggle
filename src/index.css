@@ -12,6 +12,8 @@
   font-style: normal;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Batang:wght@400;700&family=Noto+Sans+Warang+Citi&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,7 +32,7 @@
   }
 
   .sideContainer {
-    @apply w-[380px] h-full flex flex-col;
+    @apply w-[400px] h-full flex flex-col;
   }
 
   .navToggleBtn {

@@ -49,8 +49,8 @@ const MainPageSide = ({ updateMapCenter }) => {
   return (
     <>
       <div className="sideContainer">
-        <div className="flex flex-col justify-center items-center gap-10 m-[20px]">
-          <div className="w-24">
+        <div className="flex flex-col justify-center items-center gap-6 m-[20px]">
+          <div className="w-24 py-4">
             <img src={home} />
           </div>
 
@@ -63,7 +63,7 @@ const MainPageSide = ({ updateMapCenter }) => {
             산책로 만들기
           </button>
 
-          <form onSubmit={handleSearchSubmit}>
+          <form onSubmit={handleSearchSubmit} className="w-full">
             <div className="flex justify-center align-middle gap-5 mb-4">
               <button
                 type="button"
@@ -86,31 +86,38 @@ const MainPageSide = ({ updateMapCenter }) => {
                 지역이름
               </button>
             </div>
-            <input
-              type="text"
-              value={searchInput}
-              onChange={(e) => {
-                setSearchInput(e.target.value);
-              }}
-              placeholder={placeholderText}
-              className="w-full border-gray-100"
-            />
-            <button type="submit">검색</button>
+            <div className="flex justify-between">
+              <input
+                type="text"
+                value={searchInput}
+                onChange={(e) => {
+                  setSearchInput(e.target.value);
+                }}
+                placeholder={placeholderText}
+                className="input w-4/5"
+              />
+              <button
+                type="submit"
+                className="bg-primary px-2 rounded-md text-sm text-white font-semibold  hover:bg-secondary-200 transition-all"
+              >
+                검색
+              </button>
+            </div>
           </form>
         </div>
-        <div>
+        <div className="mt-2">
           {filteredRoutesInfo.map((info) => {
             const position = info.paths[0];
             return (
               <div
                 key={info.id}
-                className="w-full p-[20px] bg-red-400 mb-[20px]"
+                className=" mx-2 p-4 border-[1px] border-solid border-gray-200 rounded-md cursor-pointer hover:border-secondary-200 transition-all"
                 onClick={() => updateMapCenter(position)}
               >
-                <div>{info.routeName}</div>
-                <div>{info.address}</div>
-                <div>{info.description}</div>
-                <div>{info.region}</div>
+                <h1 className="font-bold text-secondary-200 text-lg">{info.routeName}</h1>
+                <p className="py-2">{info.address}</p>
+                <span className="text-gray-600 text-sm">{info.description}</span>
+                <p>{info.region}</p>
               </div>
             );
           })}

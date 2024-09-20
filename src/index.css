@@ -23,6 +23,10 @@
   .navToggleBtn {
     @apply h-[40px] px-[24px] bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all cursor-pointer;
   }
+
+  .input {
+    @apply border-[1px] border-solid border-gray-200 px-2 py-1.5 text-sm rounded-md focus:outline-none;
+  }
 }
 
 /* 경로 css */

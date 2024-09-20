@@ -1,4 +1,3 @@
-// authStore.js
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { register, login as loginAPI } from "../api/auth";
@@ -6,7 +5,7 @@ import { register, login as loginAPI } from "../api/auth";
 const useAuthStore = create(
   persist(
     (set) => ({
-      user: null,
+      user: { id: "", nickname: "" }, // 초기값을 객체로 설정
       token: null,
       isAuthenticated: false,
 
@@ -21,7 +20,10 @@ const useAuthStore = create(
           if (response.accessToken) {
             set({
               token: response.accessToken,
-              user: response.user, // 서버 응답에서 유저 데이터 설정
+              user: {
+                id: response.userId, // 서버 응답에서 유저 데이터 설정
+                nickname: response.nickname // 서버 응답에서 닉네임 설정
+              },
               isAuthenticated: true
             });
           } else {
@@ -32,7 +34,6 @@ const useAuthStore = create(
           alert("로그인에 실패했습니다. 다시 시도해주세요.");
         }
       },
-
       // 회원가입 함수
       signup: async (formData) => {
         try {
@@ -55,7 +56,7 @@ const useAuthStore = create(
 
       // 로그아웃 함수
       logout: () => {
-        set({ user: null, token: null, isAuthenticated: false });
+        set({ user: { id: "", nickname: "" }, token: null, isAuthenticated: false });
       }
     }),
     {

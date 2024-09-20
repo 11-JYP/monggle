@@ -48,7 +48,7 @@ const useGeoLocationStore = create((set) => ({
               isLoading: false
             }
           }));
-          console.log(position.coords.latitude, position.coords.longitude);
+          console.log("현재 위치 =>", position.coords.latitude, position.coords.longitude);
         },
         (err) => {
           set((state) => ({

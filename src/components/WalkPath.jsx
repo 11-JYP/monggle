@@ -68,7 +68,16 @@ const WalkPath = () => {
 
   if (!isLocationLoaded) {
     return (
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "40%", height: "100vh" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "end",
+          alignItems: "center",
+          width: "35%",
+          height: "100vh",
+          marginLeft: "15%"
+        }}
+      >
         <img src={loadingImage} alt="현재 위치를 불러오는 중..." />
       </div>
     );

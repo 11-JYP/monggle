@@ -5,12 +5,14 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Search from "../pages/Search";
 import ProtectedRoute from "../components/ProtectedRoute";
+import Home from "../pages/Home";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/main" element={<MainPage />} />
         <Route path="/walkpath" element={<ProtectedRoute element={WalkPathPage} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

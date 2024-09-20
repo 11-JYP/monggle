@@ -84,9 +84,9 @@ const MainPageMap = ({ center }) => {
                 <CustomOverlayMap
                   position={overlayPositions[index]} // 각 폴리곤의 첫 번째 위치에 오버레이 표시
                   yAnchor={0.5}
-                  xAnchor={0.8}
+                  xAnchor={0.5}
                 >
-                  <div className="w-full h-[30px] p-5 bg-white rounded-full flex items-center justify-center">
+                  <div className="w-full h-[30px] p-5 bg-white text-lg text-secondary-200 font-bold border-2 border-solid border-primary rounded-full flex items-center justify-center">
                     {routeNames[index]}
                   </div>
                 </CustomOverlayMap>

@@ -120,7 +120,7 @@ const SaveUserRouteInfo = () => {
             name="routeName"
             placeholder="코스명을 입력하세요"
             onChange={handleInputChange}
-            style={inputStyle}
+            className="input"
             ref={routeNameRef}
           />
           <input
@@ -128,7 +128,7 @@ const SaveUserRouteInfo = () => {
             name="address"
             placeholder="주소"
             onChange={handleInputChange}
-            style={inputStyle}
+            className="input"
             ref={addressRef}
           />
           <textarea
@@ -197,13 +197,6 @@ const SaveUserRouteInfo = () => {
 };
 
 export default SaveUserRouteInfo;
-
-const inputStyle = {
-  border: "1px solid #dddddd",
-  padding: "5px 8px",
-  fontSize: "14px",
-  borderRadius: "2px"
-};
 
 const textAreaStyle = {
   border: "1px solid #dddddd",

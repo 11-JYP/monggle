@@ -12,8 +12,8 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full flex mt-28 flex-col justify-center align-middle items-center text-center">
-      <h1 className="text-3xl font-extrabold">로그인</h1>
+    <div className="w-full flex min-h-screen flex-col justify-center align-middle items-center text-center">
+      <h1 className="text-3xl font-extrabold mb-5">로그인</h1>
       <div className="flex flex-col">
         <AuthForm mode="login" onSubmit={handleLogin} />
       </div>

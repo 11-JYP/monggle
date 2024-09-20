@@ -30,10 +30,6 @@ const SaveUserRouteInfo = () => {
 
   const routeData = routeDataStore((state) => state.routeData) || {}; // 초기값을 빈 객체로 설정
 
-  useEffect(() => {
-    console.log("색상:", selectedLineColor);
-  }, [selectedLineColor]);
-
   // 입력 값 변경 핸들러
   const handleInputChange = (e) => {
     const name = e.target.name;

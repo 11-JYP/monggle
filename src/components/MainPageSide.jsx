@@ -111,13 +111,17 @@ const MainPageSide = ({ updateMapCenter }) => {
             return (
               <div
                 key={info.id}
-                className=" mx-2 p-4 border-[1px] border-solid border-gray-200 rounded-md cursor-pointer hover:border-secondary-200 transition-all"
+                className=" mx-2 border-[1px] border-solid border-gray-200 rounded-md cursor-pointer hover:border-secondary-200 transition-all"
                 onClick={() => updateMapCenter(position)}
               >
-                <h1 className="font-bold text-secondary-200 text-lg">{info.routeName}</h1>
-                <p className="py-2">{info.address}</p>
-                <span className="text-gray-600 text-sm">{info.description}</span>
+                <h1 className="font-bold text-secondary-200 text-lg pt-4 px-4">{info.routeName}</h1>
+                <p className="py-2 px-4">{info.address}</p>
+                <span className="text-gray-600 text-sm px-4">{info.description}</span>
                 <p>{info.region}</p>
+                <div className="bg-secondary-100 flex justify-center gap-4 p-4 mt-2 rounded-b-md font-bold text-secondary-200">
+                  <span className="inline-block">총 거리 : {Math.floor(info.totalDistance)} m</span>
+                  <span className="inline-block">소요 시간 : {info.totalWalkkTime} 분</span>
+                </div>
               </div>
             );
           })}

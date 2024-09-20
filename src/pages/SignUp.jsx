@@ -12,7 +12,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex  flex-col justify-center align-middle items-center text-center">
+    <div className="w-full min-h-screen flex  flex-col justify-center align-middle items-center text-center font-Uhbee">
       <h1 className="text-3xl font-extrabold mb-5">회원가입</h1>
       <AuthForm mode="signup" onSubmit={handleSignup} />
       <div className="mt-10">

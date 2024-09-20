@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "UhBeeSe_hyun";
+  src: url("https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeSe_hyun.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Batang:wght@400;700&family=Noto+Sans+Warang+Citi&display=swap");
 
 @tailwind base;
@@ -7,7 +21,6 @@
 @layer base {
   html,
   body {
-    font-family: "Black Han Sans", system-ui !important;
     box-sizing: border-box;
     color: #333;
   }

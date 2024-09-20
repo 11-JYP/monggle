@@ -3,12 +3,15 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Pretendard-Regular", "sans-serif"],
+        Uhbee: ["UhBeeSe_hyun", "sans-serif"]
+      },
       colors: {
-        primary: "#FFA500", // 밝은 오렌지 컬러
+        primary: "#FFA500",
         secondary: {
-          100: "#FFDAB6", // 연한 살구색
-          200: "#EE8A2C" // 진한 오랜지 색
-          // orange: "#FF7B00"
+          100: "#FFDAB6",
+          200: "#EE8A2C"
         }
       }
     }

@@ -12,13 +12,13 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full flex min-h-screen flex-col justify-center align-middle items-center text-center">
+    <div className="w-full flex min-h-screen flex-col justify-center align-middle items-center text-center font-Uhbee">
       <h1 className="text-3xl font-extrabold mb-5">로그인</h1>
       <div className="flex flex-col">
         <AuthForm mode="login" onSubmit={handleLogin} />
       </div>
       <div className="mt-10">
-        <p className="text-sm text-gray-600">
+        <p className="text-gray-600">
           계정이 없으신가요?{" "}
           <Link to="/signup" className="font-semibold  hover:text-primary hover:border-b-2 ml-2">
             회원가입

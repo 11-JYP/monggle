@@ -13,6 +13,7 @@ const SaveUserRouteInfo = () => {
   const descriptionRef = useRef(null);
 
   const [clickedPuppy, setClickedPuppy] = useState("smallPuppy");
+  const [isColorClicked, setIsColorClicked] = useState(false);
   const selectColor = ["#FF7F50", "#50d0ff", "#ffd750", "#ff5079", "#BCEE68"];
 
   // store에서 객체형태로 불러와서 한번에 넘겨버려
@@ -50,6 +51,7 @@ const SaveUserRouteInfo = () => {
   // 색상 선택
   const handleSelectColor = (e) => {
     const value = e.target.value;
+    setIsColorClicked(value);
     setUserRouteData({ selectedLineColor: value });
   };
 
@@ -170,7 +172,10 @@ const SaveUserRouteInfo = () => {
                 key={lineColor}
                 value={lineColor}
                 type="button"
-                style={{ backgroundColor: lineColor }}
+                style={{
+                  backgroundColor: lineColor,
+                  border: isColorClicked === lineColor ? `3px ${lineColor + 80} solid` : "none"
+                }}
                 className="p-3 rounded text-white text-center w-5 gap-30 m-auto"
                 onClick={handleSelectColor}
               ></button>

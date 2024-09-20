@@ -29,7 +29,7 @@ const Nav = () => {
     <>
       <div className=" flex justify-between m-[16px]">
         <div className="flex gap-3">
-          <div className="navToggleBtn" onClick={() => navigate("/")}>
+          <div className="navToggleBtn" onClick={() => navigate("/main")}>
             코스
           </div>
           <div className="navToggleBtn" onClick={() => navigate("/search")}>

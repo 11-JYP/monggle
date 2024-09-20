@@ -21,7 +21,7 @@
   }
 
   .navToggleBtn {
-    @apply h-[40px] px-[24px] bg-white rounded-full flex items-center justify-center shadow-lg;
+    @apply h-[40px] px-[24px] bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all cursor-pointer;
   }
 }
 

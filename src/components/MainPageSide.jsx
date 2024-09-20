@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import fetchCoordinatesByRegion from "../api/fetchCoordinatesByRegion";
 import { useNavigate } from "react-router-dom";
+import home from "../assets/home.png";
 
 const MainPageSide = ({ updateMapCenter }) => {
   const navigate = useNavigate();
@@ -49,13 +50,12 @@ const MainPageSide = ({ updateMapCenter }) => {
     <>
       <div className="sideContainer">
         <div className="flex flex-col justify-center items-center gap-10 m-[20px]">
-          <div>
-            <img src="/" />
+          <div className="w-24">
+            <img src={home} />
           </div>
-          <h1 className="text-orange">몽글로드</h1>
 
           <button
-            className="w-full h-[40px] bg-[orange]"
+            className="w-full h-[40px] bg-primary rounded-full text-white hover:bg-secondary-200 transition-all"
             onClick={() => {
               navigate("/walkpath");
             }}
@@ -63,14 +63,14 @@ const MainPageSide = ({ updateMapCenter }) => {
             산책로 만들기
           </button>
 
-          <form onSubmit={handleSearchSubmit} className="w-full">
-            <div className="flex gap-4 mb-4">
+          <form onSubmit={handleSearchSubmit}>
+            <div className="flex justify-center align-middle gap-5 mb-4">
               <button
                 type="button"
                 className={`px-4 py-2 rounded-md border font-semibold ${
                   searchType === "routeName"
-                    ? "bg-[orange] text-white border-[orange]"
-                    : "bg-gray-200 text-gray-700 border-gray-300"
+                    ? "bg-primary text-white border-secondary-200"
+                    : "bg-white border-secondary-200"
                 }`}
                 onClick={() => setSearchType("routeName")}
               >
@@ -79,9 +79,7 @@ const MainPageSide = ({ updateMapCenter }) => {
               <button
                 type="button"
                 className={`px-4 py-2 rounded-md border font-semibold ${
-                  searchType === "region"
-                    ? "bg-orange-500 text-white border-orange-500"
-                    : "bg-gray-200 text-gray-700 border-gray-300"
+                  searchType === "region" ? "bg-primary text-white border-orange-500" : "bg-white border-secondary-200"
                 }`}
                 onClick={() => setSearchType("region")}
               >
@@ -95,7 +93,7 @@ const MainPageSide = ({ updateMapCenter }) => {
                 setSearchInput(e.target.value);
               }}
               placeholder={placeholderText}
-              className="w-full"
+              className="w-full border-gray-100"
             />
             <button type="submit">검색</button>
           </form>

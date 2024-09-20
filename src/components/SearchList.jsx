@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import SearchPagination from "./SearchPagination";
+import home from "../assets/home.png";
 
 import searchHome from "../assets/searchHome.png";
-import searchGlasses from "../assets/search.png";
 
 const SearchList = ({ handleSubmit, keyword, setKeyword, search, pagination, searchId, setSearchId, moveLatLng }) => {
   const scroll = useRef();
@@ -12,54 +12,65 @@ const SearchList = ({ handleSubmit, keyword, setKeyword, search, pagination, sea
   };
 
   return (
-    <div ref={scroll} className="sideContainer h-screen bg-primary overflow-scroll gap-8 py-5 scroll-smooth	">
-      <form className="flex justify-center gap-2 relative" onSubmit={handleSubmit}>
-        <input
-          placeholder={"예) 역삼동, 테혜란로"}
-          className="rounded-md w-4/5 h-10 pl-2"
-          type="text"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
-        <button type="submit" className="absolute right-10 top-1/2 transform -translate-y-1/2">
-          <img src={searchGlasses} className="h-[2em]" />
-        </button>
-      </form>
-      <ul className="flex flex-col gap-2.5 items-center">
-        {search.map((place, index) => (
-          <li
-            key={index}
-            onClick={() => {
-              if (place.id === searchId) {
-                setSearchId(null);
-              } else {
-                setSearchId(place.id);
-                moveLatLng(place);
-              }
-            }}
-            className="rounded-lg w-4/5  bg-white p-3"
-          >
-            <div className="flex flex-col gap-6">
-              <div>
-                <h5 className="font-bold text-lg">{place.place_name}</h5>
-                <h5 className="text-sm">{place.road_address_name}</h5>
-              </div>
-              <div className="flex justify-between">
-                <div className="flex items-center">
-                  {/* <img className="w-4" src={tel} /> */}
-                  <h5>{place.phone}</h5>
-                </div>
-                <div className="flex items-center gap-0.5">
-                  <img className="h-[1em]" src={searchHome} />
+    <div className="sideContainer  h-screen">
+      <div className="flex flex-col justify-center items-center gap-6 m-[20px]">
+        <div className="w-20 py-4">
+          <img src={home} alt="Home" />
+        </div>
+
+        <form onSubmit={handleSubmit} className="w-full">
+          <div className="flex justify-between">
+            <input
+              type="text"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              placeholder={"예) 역삼동, 언주로"}
+              className="input w-4/5"
+            />
+            <button
+              type="submit"
+              className="bg-primary px-2 rounded-md text-sm text-white font-semibold hover:bg-secondary-200 transition-all"
+            >
+              검색
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div ref={scroll} className="mt-2 overflow-scroll scroll-smooth h-[100vh]">
+        {search.length > 0 ? (
+          search.map((place, index) => (
+            <div
+              key={index}
+              className="mx-2 mb-4 border-[1px] border-solid border-gray-200 rounded-md cursor-pointer hover:border-secondary-200 transition-all"
+              onClick={() => {
+                if (place.id === searchId) {
+                  setSearchId(null);
+                } else {
+                  setSearchId(place.id);
+                  moveLatLng(place);
+                }
+              }}
+            >
+              <h1 className="font-bold text-secondary-200 text-lg pt-4 px-4">{place.place_name}</h1>
+              <p className="py-2 px-4">{place.road_address_name}</p>
+
+              <div className="bg-secondary-100 flex justify-between gap-4 p-4 mt-2 rounded-b-md font-bold text-secondary-200">
+                <span className="inline-block">{place.phone}</span>
+                <div className="flex gap-1 ">
+                  <img src={searchHome} className="h-[1em]" />
                   <a href={place.place_url} target="_blank">
                     홈페이지
                   </a>
                 </div>
               </div>
             </div>
-          </li>
-        ))}
-      </ul>
+          ))
+        ) : (
+          <p className="text-center text-gray-500">검색 결과가 없습니다.</p>
+        )}
+      </div>
+
       {/* 페이지네이션을 표시하는 부분 */}
       <SearchPagination
         currentPage={pagination.current} // 현재 페이지 상태

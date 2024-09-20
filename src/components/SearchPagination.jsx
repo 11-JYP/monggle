@@ -9,14 +9,14 @@ const SearchPagination = ({ currentPage, lastPage, onPageChange, scrollToTop }) 
   };
 
   return (
-    <div className="flex justify-center gap-2">
+    <div className="flex justify-center my-4">
       {Array.from({ length: lastPage }, (_, index) => index + 1).map((page) => (
         <button
           key={page}
           onClick={() => {
             handlePageClick(page);
           }}
-          className={`p-1 ${page === currentPage ? "text-white" : "text-black	"}`}
+          className={`mx-1 px-3 py-1 ${page === currentPage ? " text-[orange]" : "text-gray-700"}`}
         >
           {page}
         </button>

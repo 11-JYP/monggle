@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import SearchPagination from "./SearchPagination";
 
 import searchHome from "../assets/searchHome.png";
 import searchGlasses from "../assets/search.png";
 
 const SearchList = ({ handleSubmit, keyword, setKeyword, search, pagination, searchId, setSearchId, moveLatLng }) => {
+  const scroll = useRef();
+
+  const scrollToTop = () => {
+    scroll.current.scrollTop = 0;
+  };
+
   return (
-    <div className="sideContainer h-screen bg-[#FF7B00]  overflow-scroll gap-8 py-5">
+    <div ref={scroll} className="sideContainer h-screen bg-primary overflow-scroll gap-8 py-5 scroll-smooth	">
       <form className="flex justify-center gap-2 relative" onSubmit={handleSubmit}>
         <input
           placeholder={"예) 역삼동, 테혜란로"}
-          className="rounded-md w-4/5 h-10"
+          className="rounded-md w-4/5 h-10 pl-2"
           type="text"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
@@ -59,6 +65,7 @@ const SearchList = ({ handleSubmit, keyword, setKeyword, search, pagination, sea
         currentPage={pagination.current} // 현재 페이지 상태
         lastPage={pagination.last} // 마지막 페이지 상태
         onPageChange={pagination.gotoPage} // 페이지 전환 함수
+        scrollToTop={scrollToTop}
       />
     </div>
   );

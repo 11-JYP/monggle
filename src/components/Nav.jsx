@@ -21,7 +21,7 @@ const Nav = () => {
   // 로그아웃 후 상태가 변경되면 navigate로 홈으로 이동
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/"); // 로그아웃이 완료되면 홈으로 이동
+      navigate("/main"); // 로그아웃이 완료되면 홈으로 이동
     }
   }, [isAuthenticated, navigate]);
 

@@ -10,6 +10,7 @@ const MainPageMap = ({ center }) => {
   const [polygonPaths, setPolygonPaths] = useState([]);
   const [overlayPositions, setOverlayPositions] = useState([]);
   const [routeNames, setRouteNames] = useState([]);
+  const [selectedLineColor, setSelectedLineColor] = useState([]);
 
   useEffect(() => {
     getGeoLocation(); // 페이지에서 위치 정보 가져오기
@@ -21,6 +22,7 @@ const MainPageMap = ({ center }) => {
         const response = await axios.get(API_URL);
         const responseRoute = response?.data.map((route) => route.paths);
         const names = response?.data.map((route) => route.routeName);
+        const lineColor = response?.data.map((route) => route.selectedLineColor);
 
         if (responseRoute) {
           setPolygonPaths(responseRoute);
@@ -33,6 +35,9 @@ const MainPageMap = ({ center }) => {
         // 각 routeName을 추출하여 상태에 저장
         setRouteNames(names);
         console.log(routeNames);
+
+        // 선 색 저장
+        setSelectedLineColor(lineColor);
       } catch (error) {
         console.log("에러 =>", error);
       }
@@ -69,10 +74,10 @@ const MainPageMap = ({ center }) => {
               <Polygon
                 path={path}
                 strokeWeight={2}
-                strokeColor={"#EE8A2C"}
+                strokeColor={selectedLineColor[index] ? selectedLineColor[index] : "#FF7F50"}
                 strokeOpacity={0.8}
                 strokeStyle={"shortdash"}
-                fillColor={"#FFDAB6"}
+                fillColor={selectedLineColor[index] ? selectedLineColor[index] + "80" : "#FF7F5080"}
                 fillOpacity={0.7}
               />
               {overlayPositions[index] && (

@@ -3,11 +3,14 @@ import routeDataStore from "../zustand/routeDataStore";
 import { createRouteInfo } from "../api/pathDataSave";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../zustand/authStore";
+import { useRef } from "react";
 
 const SaveUserRouteInfo = () => {
   const navigate = useNavigate();
-
   const { user } = useAuthStore();
+  const routeNameRef = useRef(null);
+  const addressRef = useRef(null);
+  const descriptionRef = useRef(null);
 
   // store에서 객체형태로 불러와서 한번에 넘겨버려
   const { routeName, address, description, selectedPuppy, setUserRouteData } = userRouteStore((state) => ({
@@ -47,12 +50,30 @@ const SaveUserRouteInfo = () => {
       return;
     }
 
+    if (!routeName) {
+      alert("루트 이름을 입력해주세요.");
+      routeNameRef.current.focus();
+      return;
+    }
+
+    if (!address) {
+      alert("주소를 입력해주세요.");
+      addressRef.current.focus();
+      return;
+    }
+
+    if (!description) {
+      alert("설명을 입력해주세요.");
+      descriptionRef.current.focus();
+      return;
+    }
+
     console.log("제출할 데이터:", userRouteAllData); // 제출 전 확인
 
     try {
       await createRouteInfo(userRouteAllData);
       alert("루트 정보 저장 완료!");
-      navigate("/");
+      navigate("/main");
     } catch (error) {
       console.error("루트 정보 저장 에러", error);
     }
@@ -71,8 +92,16 @@ const SaveUserRouteInfo = () => {
             placeholder="코스명을 입력하세요"
             onChange={handleInputChange}
             style={inputStyle}
+            ref={routeNameRef}
           />
-          <input value={address} name="address" placeholder="주소" onChange={handleInputChange} style={inputStyle} />
+          <input
+            value={address}
+            name="address"
+            placeholder="주소"
+            onChange={handleInputChange}
+            style={inputStyle}
+            ref={addressRef}
+          />
           <textarea
             value={description}
             name="description"
@@ -80,6 +109,7 @@ const SaveUserRouteInfo = () => {
             onChange={handleInputChange}
             maxLength={100}
             style={textAreaStyle}
+            ref={descriptionRef}
           />
           <select value={selectedPuppy} name="selectedPuppy" onChange={handleInputChange}>
             <option value="default" disabled>

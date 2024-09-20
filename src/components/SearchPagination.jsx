@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const SearchPagination = ({ currentPage, lastPage, onPageChange }) => {
   const handlePageClick = (page) => {
@@ -8,15 +8,14 @@ const SearchPagination = ({ currentPage, lastPage, onPageChange }) => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', gap: '5px' }}>
+    <div className="flex justify-center gap-2">
       {Array.from({ length: lastPage }, (_, index) => index + 1).map((page) => (
         <button
           key={page}
           onClick={() => {
-            console.log('page :>> ', page);
             handlePageClick(page);
           }}
-          style={{ padding: '5px', backgroundColor: page === currentPage ? 'lightblue' : 'white' }}
+          className={`p-1 ${page === currentPage ? "text-white" : "text-black	"}`}
         >
           {page}
         </button>

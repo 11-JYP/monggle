@@ -36,9 +36,6 @@ const SearchContent = () => {
   const [markers, setMarkers] = useState([]);
 
   const [clickKeyword, setClickKeyword] = useState("");
-  //민지님 코드
-  /** 검색 결과 */
-  // const [places, setPlaces] = useState([]);
 
   /** 검색 키워드 */
   const [keyword, setKeyword] = useState("");
@@ -85,12 +82,19 @@ const SearchContent = () => {
 
     const placeSearch = (data, status, pagination) => {
       if (status === kakao.maps.services.Status.OK) {
-        // setPlaces(data);
         setSearch(data);
         displayPlaces(data); // TODO 변경사항
         const bounds = new kakao.maps.LatLngBounds();
         data.forEach((item) => bounds.extend(new kakao.maps.LatLng(item.y, item.x)));
         map.setBounds(bounds);
+
+        // 검색 기준 현재 위치 last좌표 저장
+        const centerLatLng = map.getCenter();
+        const newCenter = {
+          lat: centerLatLng.getLat(),
+          lng: centerLatLng.getLng()
+        };
+        setLastCenter(newCenter);
         // 페이지네이션 객체 저장
         setPagination({
           current: pagination.current,
@@ -107,7 +111,6 @@ const SearchContent = () => {
     e.preventDefault();
     searchKeyword();
   };
-  //민지님 코드
 
   const searchPlaces = (center, page) => {
     if (!state.center) return;
@@ -124,13 +127,11 @@ const SearchContent = () => {
       categoryKeyword,
       (data, status, categorypagination) => {
         if (status === kakao.maps.services.Status.OK) {
-          // setPlaces(data);
           setSearch(data);
           displayPlaces(data);
           const bounds = new kakao.maps.LatLngBounds();
           data.forEach((item) => bounds.extend(new kakao.maps.LatLng(item.y, item.x)));
           map.setBounds(bounds);
-          // setCategoryPagination(categorypagination);
 
           // 페이지네이션 객체 저장
           setPagination({
@@ -172,8 +173,6 @@ const SearchContent = () => {
       lat: centerLatLng.getLat(),
       lng: centerLatLng.getLng()
     };
-    console.log(centerLatLng);
-    console.log(newCenter);
     setCurrentPage(1);
     searchPlaces(newCenter, 1);
     setLastCenter(newCenter);
@@ -238,6 +237,7 @@ const SearchContent = () => {
             </button>
             {KEYWORD_LIST.map((keyword) => (
               <CategorySearch
+                key={keyword.id}
                 keyword={keyword}
                 setClickKeyword={setClickKeyword}
                 handleKeywordSelect={handleKeywordSelect}

@@ -3,7 +3,7 @@ import routeDataStore from "../zustand/routeDataStore";
 import { createRouteInfo } from "../api/pathDataSave";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../zustand/authStore";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const SaveUserRouteInfo = () => {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ const SaveUserRouteInfo = () => {
   const routeNameRef = useRef(null);
   const addressRef = useRef(null);
   const descriptionRef = useRef(null);
+  const [clickedPuppy, setClickedPuppy] = useState("smallPuppy");
 
   // store에서 객체형태로 불러와서 한번에 넘겨버려
   const { routeName, address, description, selectedPuppy, setUserRouteData } = userRouteStore((state) => ({
@@ -28,6 +29,13 @@ const SaveUserRouteInfo = () => {
     const name = e.target.name;
     const value = e.target.value;
     setUserRouteData({ [name]: value });
+  };
+
+  // 강아지 선택
+  const handleSelectPuppy = (e) => {
+    const value = e.target.value;
+    setClickedPuppy(value);
+    setUserRouteData({ selectedPuppy: value });
   };
 
   // 폼 제출 핸들러
@@ -111,13 +119,33 @@ const SaveUserRouteInfo = () => {
             style={textAreaStyle}
             ref={descriptionRef}
           />
-          <select value={selectedPuppy} name="selectedPuppy" onChange={handleInputChange}>
+          <button
+            type="button"
+            value="smallPuppy"
+            className={`p-3 rounded text-white ${
+              clickedPuppy === "smallPuppy" ? "bg-orange-400" : "bg-gray-400"
+            } text-center w-28 m-auto`}
+            onClick={handleSelectPuppy}
+          >
+            소형견
+          </button>
+          <button
+            type="button"
+            value="bigPuppy"
+            className={`p-3 rounded text-white ${
+              clickedPuppy === "bigPuppy" ? "bg-orange-400" : "bg-gray-400"
+            } text-center w-28 m-auto`}
+            onClick={handleSelectPuppy}
+          >
+            대형견
+          </button>
+          {/* <select value={selectedPuppy} name="selectedPuppy" onChange={handleInputChange}>
             <option value="default" disabled>
               이런 강아지에게 추천해요
             </option>
             <option value="smallPuppy">소형견</option>
             <option value="bigPuppy">대형견</option>
-          </select>
+          </select> */}
         </div>
         <div className="bg-slate-100 rounded-lg flex justify-center gap-10 py-3 w-full text-sm ">
           <div className="flex flex-col gap-4">

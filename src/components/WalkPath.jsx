@@ -4,14 +4,8 @@ import routeDataStore from "../zustand/routeDataStore";
 import useCurrentLocation from "../hooks/useCurrentLocation";
 import loadingImage from "../assets/loadingImage.png";
 
-const WalkPath = () => {
-  const managerRef = useRef(null);
-  const [paths, setPaths] = useState([]);
-  const [distance, setDistance] = useState(0);
-  const [isDrawingComplete, setIsDrawingComplete] = useState(false);
-  const [lastPosition, setLastPosition] = useState(null);
-
-  // 경로 데이터 계산 및 저장 함수
+// 경로 데이터 계산 및 저장 함수
+const useRouteData = (paths, distance) => {
   const setRouteData = routeDataStore((state) => state.setRouteData);
 
   useEffect(() => {
@@ -21,12 +15,53 @@ const WalkPath = () => {
 
       setRouteData({
         paths,
-        totalDistance,
-        totalWalkkTime: walkTime
+        totalDistance, // 총 거리 저장
+        totalWalkkTime: walkTime // 계산된 걷는 시간 저장
       });
       console.log("루트 데이터 저장 완료:", paths, totalDistance, walkTime);
     }
   }, [paths, distance, setRouteData]);
+};
+
+const WalkPath = () => {
+  const managerRef = useRef(null);
+  const [paths, setPaths] = useState([]);
+  const [distance, setDistance] = useState(0);
+  const [isDrawingComplete, setIsDrawingComplete] = useState(false);
+  const [lastPosition, setLastPosition] = useState(null);
+  const setRouteData = routeDataStore((state) => state.setRouteData);
+
+  // 선 그리기 모드 선택 함수
+  const selectOverlay = () => {
+    const manager = managerRef.current;
+    manager.cancel(); // 그리기 취소
+    manager.select(window.kakao.maps.drawing.OverlayType.POLYLINE);
+  };
+
+  useEffect(() => {
+    //Esc로 선 그리기 취소
+    const handleInfoReset = (e) => {
+      const manager = managerRef.current;
+      if (e.key === "Escape") {
+        setPaths([]);
+        setDistance(0);
+        setLastPosition(null);
+        setIsDrawingComplete(false);
+        setRouteData({});
+
+        manager.clear(); // 지도에서 그린 모든 선 제거
+        manager.cancel(); // 기존 그리기 취소
+        selectOverlay(); // 새로운 그리기 모드 시작
+      }
+    };
+    window.addEventListener("keydown", handleInfoReset);
+    return () => {
+      window.removeEventListener("keydown", handleInfoReset);
+    };
+  }, []);
+
+  // 경로 데이터 로직 사용
+  useRouteData(paths, distance);
 
   // 현재 위치 정보 가져오기
   const { location, isLocationLoaded } = useCurrentLocation();
@@ -38,13 +73,6 @@ const WalkPath = () => {
       </div>
     );
   }
-
-  // 선 그리기 모드 선택 함수
-  const selectOverlay = () => {
-    const manager = managerRef.current;
-    manager.cancel(); // 그리기 취소
-    manager.select(window.kakao.maps.drawing.OverlayType.POLYLINE);
-  };
 
   // 그리기 완료 후 경로 데이터 계산 및 저장
   const handleDrawComplete = () => {
@@ -86,6 +114,7 @@ const WalkPath = () => {
     setDistance(0);
     setLastPosition(null);
     setIsDrawingComplete(false);
+    setRouteData({});
 
     routeDataStore.setState({
       totalDistance: 0,

@@ -41,7 +41,12 @@ const SaveUserRouteInfo = () => {
       selectedPuppy,
       ...routeData // routeDataStore에서 가져온 경로 정보 추가
     };
-    console.log(user);
+
+    if (Object.keys(routeData).length === 0) {
+      alert("루트를 그려주세요");
+      return;
+    }
+
     console.log("제출할 데이터:", userRouteAllData); // 제출 전 확인
 
     try {

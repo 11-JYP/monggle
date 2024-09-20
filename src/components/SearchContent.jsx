@@ -88,7 +88,9 @@ const SearchContent = () => {
         // setPlaces(data);
         setSearch(data);
         displayPlaces(data); // TODO 변경사항
-
+        const bounds = new kakao.maps.LatLngBounds();
+        data.forEach((item) => bounds.extend(new kakao.maps.LatLng(item.y, item.x)));
+        map.setBounds(bounds);
         // 페이지네이션 객체 저장
         setPagination({
           current: pagination.current,

@@ -10,9 +10,6 @@ export default {
           200: "#EE8A2C" // 진한 오랜지 색
           // orange: "#FF7B00"
         }
-      },
-      fontFamily: {
-        body: ["Montserrat"]
       }
     }
   },

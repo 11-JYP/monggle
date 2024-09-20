@@ -24,7 +24,7 @@ const AuthForm = ({ mode, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col pt-4 justify-center align-middle items-center ">
+    <form onSubmit={handleSubmit} className="w-96 flex flex-col pt-4 justify-center align-middle items-center gap-4">
       <input
         type="text"
         name="userId"
@@ -32,7 +32,7 @@ const AuthForm = ({ mode, onSubmit }) => {
         onChange={handleChange}
         placeholder="아이디"
         required
-        className="w-56 p-3 m-3 border border-gray-300 rounded-lg"
+        className="input w-full"
       />
       <input
         type="password"
@@ -42,7 +42,7 @@ const AuthForm = ({ mode, onSubmit }) => {
         placeholder="비밀번호"
         minLength="4"
         required
-        className="w-56 p-3 m-3 border border-gray-300 rounded-lg"
+        className="input w-full"
       />
       {mode === "signup" && (
         <input
@@ -52,12 +52,12 @@ const AuthForm = ({ mode, onSubmit }) => {
           onChange={handleChange}
           placeholder="닉네임"
           required
-          className="w-56 p-3 m-3  border border-gray-300 rounded-lg"
+          className="input w-full"
         />
       )}
       <button
         type="submit"
-        className="w-40 bg-primary hover:bg-secondary-100 text-white font-bold py-3 mt-5 rounded-full"
+        className="w-full bg-primary hover:bg-secondary-200 text-white font-bold py-3 mt-5 rounded-full transition-all"
       >
         {mode === "login" ? "로그인" : "회원가입"}
       </button>

@@ -27,6 +27,9 @@
   .input {
     @apply h-10 border-[1px] border-solid border-gray-200 px-2 py-1.5 text-sm rounded-md focus:outline-secondary-200;
   }
+  .drawBtn {
+    @apply w-[120px] h-[40px] inline-block my-10 m-auto bg-[#007bff] text-white rounded-full border-none cursor-pointer absolute right-[40px] z-10;
+  }
 }
 
 /* 경로 css */

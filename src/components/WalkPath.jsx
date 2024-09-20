@@ -69,14 +69,15 @@ const WalkPath = () => {
   if (!isLocationLoaded) {
     return (
       <div
-        style={{
-          display: "flex",
-          justifyContent: "end",
-          alignItems: "center",
-          width: "35%",
-          height: "100vh",
-          marginLeft: "15%"
-        }}
+        className="flex justify-center align-middle w-1/3 ml-[15%]"
+        // style={{
+        //   display: "flex",
+        //   justifyContent: "end",
+        //   alignItems: "center",
+        //   width: "35%",
+        //   height: "100vh",
+        //   marginLeft: "15%"
+        // }}
       >
         <img src={loadingImage} alt="현재 위치를 불러오는 중..." />
       </div>
@@ -154,10 +155,10 @@ const WalkPath = () => {
         />
 
         <div>
-          <button onClick={selectOverlay} style={buttonStyle}>
+          <button onClick={selectOverlay} className="drawBtn bottom-[70px]">
             선 그리기 시작
           </button>
-          <button onClick={handleDrawComplete} style={completeButtonStyle}>
+          <button onClick={handleDrawComplete} className="drawBtn bottom-[10px] bg-secondary-200">
             그리기 완료
           </button>
         </div>
@@ -211,27 +212,6 @@ const DistanceInfo = ({ distance, handleReset }) => {
 };
 
 // 스타일 부분 객체로 분리 -> 테일윈드 작업 필요!
-const buttonStyle = {
-  position: "absolute",
-  bottom: "70px",
-  right: "10px",
-  zIndex: "10",
-  display: "inline-block",
-  width: "100px",
-  height: "40px",
-  margin: "10px auto",
-  backgroundColor: "#007bff",
-  color: "white",
-  border: "none",
-  borderRadius: "5px",
-  cursor: "pointer"
-};
-
-const completeButtonStyle = {
-  ...buttonStyle,
-  bottom: "10px",
-  backgroundColor: "#ff9672"
-};
 
 const resetButtonStyle = {
   display: "inline-block",

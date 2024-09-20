@@ -52,7 +52,7 @@ const SaveUserRouteInfo = () => {
     try {
       await createRouteInfo(userRouteAllData);
       alert("루트 정보 저장 완료!");
-      navigate("/");
+      navigate("/main");
     } catch (error) {
       console.error("루트 정보 저장 에러", error);
     }

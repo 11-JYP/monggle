@@ -13,7 +13,7 @@ const NavBottom = () => {
       <div className="flex justify-end m-[16px]">
         <button
           onClick={nowLocation}
-          className="w-[50px] h-[50px] bg-white rounded-full p-[10px] shadow hover:bg-[orange] transition duration-200 ease-in-out flex justify-center items-center"
+          className="w-[50px] h-[50px] bg-white rounded-full p-[10px] shadow hover:bg-secondary-200 transition duration-200 ease-in-out flex justify-center items-center"
         >
           <img src={targetImg} alt="target" className="w-full h-full" />
         </button>

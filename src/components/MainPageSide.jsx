@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import fetchCoordinatesByRegion from "../api/fetchCoordinatesByRegion";
 import { useNavigate } from "react-router-dom";
+import home from "../assets/home.png";
 
 const MainPageSide = ({ updateMapCenter }) => {
   const navigate = useNavigate();
@@ -12,13 +13,14 @@ const MainPageSide = ({ updateMapCenter }) => {
 
   // 페이지네이션 상태
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // 한 페이지에 보여줄 항목 수
+  const itemsPerPage = 2; // 한 페이지에 보여줄 항목 수
 
   useEffect(() => {
     const getRoutesInfo = async () => {
       try {
         const response = await axios.get("http://localhost:4005/Route");
         setRoutesInfo(response.data);
+        setFilteredRoutesInfo(response.data); // 초기화 시 필터된 값도 전체를 보여주기 위해 설정
       } catch (error) {
         console.log("데이터를 불러오지 못했습니다.", error);
       }
@@ -72,97 +74,91 @@ const MainPageSide = ({ updateMapCenter }) => {
   const placeholderText = searchType === "routeName" ? "산책 이름을 입력해주세요." : "지역명을 입력해주세요.";
 
   return (
-    <>
-      <div className="sideContainer flex flex-col justify-between h-full">
-        <div>
-          <div className="flex flex-col justify-center items-center gap-10 m-[20px]">
-            <div>
-              <img src="/" alt="로고" />
-            </div>
-            <h1 className="text-orange">몽글로드</h1>
-
-            <div className="w-full">
-              <button
-                className="w-full h-[40px] bg-[orange]"
-                onClick={() => {
-                  navigate("/walkpath");
-                }}
-              >
-                산책로 만들기
-              </button>
-            </div>
-
-            {/* 검색 */}
-            <div>
-              <form onSubmit={handleSearchSubmit} className="w-full">
-                <div className="flex gap-4 mb-4">
-                  <button
-                    type="button"
-                    className={`px-4 py-2 rounded-md border font-semibold ${
-                      searchType === "routeName"
-                        ? "bg-[orange] text-white border-[orange]"
-                        : "bg-gray-200 text-gray-700 border-gray-300"
-                    }`}
-                    onClick={() => {
-                      setSearchType("routeName");
-                      setSearchInput("");
-                    }}
-                  >
-                    산책이름
-                  </button>
-                  <button
-                    type="button"
-                    className={`px-4 py-2 rounded-md border font-semibold ${
-                      searchType === "region"
-                        ? "bg-orange-500 text-white border-orange-500"
-                        : "bg-gray-200 text-gray-700 border-gray-300"
-                    }`}
-                    onClick={() => {
-                      setSearchType("region");
-                      setSearchInput("");
-                    }}
-                  >
-                    지역이름
-                  </button>
-                </div>
-                <input
-                  type="text"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  placeholder={placeholderText}
-                  className="w-full"
-                />
-                <button type="submit">검색</button>
-              </form>
-            </div>
-          </div>
-
-          {/* 검색된 루트 표시 */}
-          <div className="flex-grow overflow-y-auto">
-            {currentItems.map((info) => {
-              const position = info.paths[0];
-              return (
-                <div
-                  key={info.id}
-                  className="w-full p-[20px] bg-red-400 mb-[20px]"
-                  onClick={() => updateMapCenter(position)}
-                >
-                  <div>{info.routeName}</div>
-                  <div>{info.address}</div>
-                  <div>{info.description}</div>
-                  <div>{info.region}</div>
-                </div>
-              );
-            })}
-          </div>
+    <div className="sideContainer">
+      <div className="flex flex-col justify-center items-center gap-6 m-[20px]">
+        <div className="w-20 py-4">
+          <img src={home} alt="Home" />
         </div>
 
-        {/* 페이지네이션 */}
-        <div>
-          <div className="flex justify-center mt-4">{renderPageNumbers()}</div>
-        </div>
+        <button
+          className="w-full h-[40px] bg-primary rounded-full text-white hover:bg-secondary-200 transition-all"
+          onClick={() => navigate("/walkpath")}
+        >
+          산책로 만들기
+        </button>
+
+        <form onSubmit={handleSearchSubmit} className="w-full">
+          <div className="flex justify-center align-middle gap-5 mb-4">
+            <button
+              type="button"
+              className={`px-4 py-2 rounded-md border font-semibold ${
+                searchType === "routeName"
+                  ? "bg-primary text-white border-secondary-200"
+                  : "bg-white border-secondary-200"
+              }`}
+              onClick={() => {
+                setSearchType("routeName");
+                setSearchInput("");
+              }}
+            >
+              산책이름
+            </button>
+            <button
+              type="button"
+              className={`px-4 py-2 rounded-md border font-semibold ${
+                searchType === "region" ? "bg-primary text-white border-orange-500" : "bg-white border-secondary-200"
+              }`}
+              onClick={() => {
+                setSearchType("region");
+                setSearchInput("");
+              }}
+            >
+              지역이름
+            </button>
+          </div>
+          <div className="flex justify-between">
+            <input
+              type="text"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              placeholder={placeholderText}
+              className="input w-4/5"
+            />
+            <button
+              type="submit"
+              className="bg-primary px-2 rounded-md text-sm text-white font-semibold hover:bg-secondary-200 transition-all"
+            >
+              검색
+            </button>
+          </div>
+        </form>
       </div>
-    </>
+
+      <div className="mt-2">
+        {currentItems.length > 0 ? (
+          currentItems.map((info) => (
+            <div
+              key={info.id}
+              className="mx-2 mb-4 border-[1px] border-solid border-gray-200 rounded-md cursor-pointer hover:border-secondary-200 transition-all"
+              onClick={() => updateMapCenter(info.paths[0])}
+            >
+              <h1 className="font-bold text-secondary-200 text-lg pt-4 px-4">{info.routeName}</h1>
+              <p className="py-2 px-4">{info.address}</p>
+              <span className="text-gray-600 text-sm px-4">{info.description}</span>
+              <p>{info.region}</p>
+              <div className="bg-secondary-100 flex justify-center gap-4 p-4 mt-2 rounded-b-md font-bold text-secondary-200">
+                <span className="inline-block">총 거리 : {Math.floor(info.totalDistance)} m</span>
+                <span className="inline-block">소요 시간 : {info.totalWalkkTime} 분</span>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-500">검색 결과가 없습니다.</p>
+        )}
+      </div>
+
+      <div className="flex justify-center mt-4">{renderPageNumbers()}</div>
+    </div>
   );
 };
 

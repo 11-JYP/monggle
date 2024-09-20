@@ -4,10 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#EE8A2C",
+        primary: "#FFA500", // 밝은 오렌지 컬러
         secondary: {
-          100: "#FFDAB6",
-          orange: "#FF7B00"
+          100: "#FFDAB6", // 연한 살구색
+          200: "#EE8A2C" // 진한 오랜지 색
+          // orange: "#FF7B00"
         }
       },
       fontFamily: {

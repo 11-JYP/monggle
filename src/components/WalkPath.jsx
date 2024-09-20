@@ -3,6 +3,7 @@ import { CustomOverlayMap, Map, DrawingManager } from "react-kakao-maps-sdk";
 import routeDataStore from "../zustand/routeDataStore";
 import useCurrentLocation from "../hooks/useCurrentLocation";
 import loadingImage from "../assets/loadingImage.png";
+import userRouteStore from "../zustand/userRouteStore";
 
 // 경로 데이터 계산 및 저장 함수
 const useRouteData = (paths, distance) => {
@@ -30,6 +31,10 @@ const WalkPath = () => {
   const [isDrawingComplete, setIsDrawingComplete] = useState(false);
   const [lastPosition, setLastPosition] = useState(null);
   const setRouteData = routeDataStore((state) => state.setRouteData);
+
+  const { selectedLineColor } = userRouteStore((state) => ({
+    selectedLineColor: state.routeFormData.selectedLineColor
+  }));
 
   useEffect(() => {
     // 페이지 로드 시 정보 리셋
@@ -145,6 +150,7 @@ const WalkPath = () => {
     <>
       <Map id="map" center={location} style={{ width: "100%", height: "100vh" }} level={3}>
         <DrawingManager
+          key={selectedLineColor}
           ref={managerRef}
           drawingMode={["polyline"]}
           guideTooltip={["draw", "drag", "edit"]}
@@ -152,7 +158,7 @@ const WalkPath = () => {
             draggable: true,
             removable: true,
             editable: true,
-            strokeColor: "#39f",
+            strokeColor: selectedLineColor ? selectedLineColor : "#FF7F50",
             hintStrokeStyle: "dash",
             hintStrokeOpacity: 0.5
           }}

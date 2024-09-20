@@ -5,7 +5,7 @@ const userRouteStore = create((set) => ({
     routeName: "",
     address: "",
     description: "",
-    selectedPuppy: "default",
+    selectedPuppy: "smallPuppy",
     selectedLineColor: "#FF7F50"
   },
 

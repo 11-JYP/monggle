@@ -97,6 +97,13 @@ const SaveUserRouteInfo = () => {
     try {
       await createRouteInfo(userRouteAllData);
       alert("루트 정보 저장 완료!");
+      setUserRouteData({
+        routeName: "",
+        address: "",
+        description: "",
+        selectedPuppy: "smallPuppy",
+        selectedLineColor: "#FF7F50"
+      });
       navigate("/main");
     } catch (error) {
       console.error("루트 정보 저장 에러", error);

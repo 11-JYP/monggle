@@ -5,7 +5,8 @@ const userRouteStore = create((set) => ({
     routeName: "",
     address: "",
     description: "",
-    selectedPuppy: "default"
+    selectedPuppy: "default",
+    selectedLineColor: "blue"
   },
 
   setUserRouteData: (data) => set((state) => ({ routeFormData: { ...state.routeFormData, ...data } }))

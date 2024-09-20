@@ -3,7 +3,7 @@ import routeDataStore from "../zustand/routeDataStore";
 import { createRouteInfo } from "../api/pathDataSave";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../zustand/authStore";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const SaveUserRouteInfo = () => {
   const navigate = useNavigate();
@@ -11,18 +11,27 @@ const SaveUserRouteInfo = () => {
   const routeNameRef = useRef(null);
   const addressRef = useRef(null);
   const descriptionRef = useRef(null);
+
   const [clickedPuppy, setClickedPuppy] = useState("smallPuppy");
+  const selectColor = ["cornflowerblue", "blue", "pink", "red", "coral"];
 
   // store에서 객체형태로 불러와서 한번에 넘겨버려
-  const { routeName, address, description, selectedPuppy, setUserRouteData } = userRouteStore((state) => ({
-    routeName: state.routeFormData.routeName,
-    address: state.routeFormData.address,
-    description: state.routeFormData.description,
-    selectedPuppy: state.routeFormData.selectedPuppy,
-    setUserRouteData: state.setUserRouteData
-  }));
+  const { routeName, address, description, selectedPuppy, selectedLineColor, setUserRouteData } = userRouteStore(
+    (state) => ({
+      routeName: state.routeFormData.routeName,
+      address: state.routeFormData.address,
+      description: state.routeFormData.description,
+      selectedPuppy: state.routeFormData.selectedPuppy,
+      selectedLineColor: state.routeFormData.selectedLineColor,
+      setUserRouteData: state.setUserRouteData
+    })
+  );
 
   const routeData = routeDataStore((state) => state.routeData) || {}; // 초기값을 빈 객체로 설정
+
+  useEffect(() => {
+    console.log("색상:", selectedLineColor);
+  }, [selectedLineColor]);
 
   // 입력 값 변경 핸들러
   const handleInputChange = (e) => {
@@ -38,6 +47,12 @@ const SaveUserRouteInfo = () => {
     setUserRouteData({ selectedPuppy: value });
   };
 
+  // 색상 선택
+  const handleSelectColor = (e) => {
+    const value = e.target.value;
+    setUserRouteData({ selectedLineColor: value });
+  };
+
   // 폼 제출 핸들러
   const handleRouteFormSubmit = async (e) => {
     e.preventDefault();
@@ -50,6 +65,7 @@ const SaveUserRouteInfo = () => {
       address,
       description,
       selectedPuppy,
+      selectedLineColor,
       ...routeData // routeDataStore에서 가져온 경로 정보 추가
     };
 
@@ -119,33 +135,40 @@ const SaveUserRouteInfo = () => {
             style={textAreaStyle}
             ref={descriptionRef}
           />
-          <button
-            type="button"
-            value="smallPuppy"
-            className={`p-3 rounded text-white ${
-              clickedPuppy === "smallPuppy" ? "bg-orange-400" : "bg-gray-400"
-            } text-center w-28 m-auto`}
-            onClick={handleSelectPuppy}
-          >
-            소형견
-          </button>
-          <button
-            type="button"
-            value="bigPuppy"
-            className={`p-3 rounded text-white ${
-              clickedPuppy === "bigPuppy" ? "bg-orange-400" : "bg-gray-400"
-            } text-center w-28 m-auto`}
-            onClick={handleSelectPuppy}
-          >
-            대형견
-          </button>
-          {/* <select value={selectedPuppy} name="selectedPuppy" onChange={handleInputChange}>
-            <option value="default" disabled>
-              이런 강아지에게 추천해요
-            </option>
-            <option value="smallPuppy">소형견</option>
-            <option value="bigPuppy">대형견</option>
-          </select> */}
+          <div>
+            <button
+              type="button"
+              value="smallPuppy"
+              className={`p-3 rounded text-white ${
+                clickedPuppy === "smallPuppy" ? "bg-orange-400" : "bg-gray-400"
+              } text-center w-28 m-auto`}
+              onClick={handleSelectPuppy}
+            >
+              소형견
+            </button>
+            <button
+              type="button"
+              value="bigPuppy"
+              className={`p-3 rounded text-white ${
+                clickedPuppy === "bigPuppy" ? "bg-orange-400" : "bg-gray-400"
+              } text-center w-28 m-auto`}
+              onClick={handleSelectPuppy}
+            >
+              대형견
+            </button>
+          </div>
+          <div>
+            {selectColor.map((lineColor) => (
+              <button
+                key={lineColor}
+                value={lineColor}
+                type="button"
+                style={{ backgroundColor: lineColor }}
+                className="p-3 rounded text-white text-center w-5 gap-30 m-auto"
+                onClick={handleSelectColor}
+              ></button>
+            ))}
+          </div>
         </div>
         <div className="bg-slate-100 rounded-lg flex justify-center gap-10 py-3 w-full text-sm ">
           <div className="flex flex-col gap-4">

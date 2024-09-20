@@ -13,7 +13,7 @@ const SaveUserRouteInfo = () => {
   const descriptionRef = useRef(null);
 
   const [clickedPuppy, setClickedPuppy] = useState("smallPuppy");
-  const selectColor = ["cornflowerblue", "blue", "pink", "red", "coral"];
+  const selectColor = ["#FF7F50", "#50d0ff", "#ffd750", "#ff5079", "#BCEE68"];
 
   // store에서 객체형태로 불러와서 한번에 넘겨버려
   const { routeName, address, description, selectedPuppy, selectedLineColor, setUserRouteData } = userRouteStore(

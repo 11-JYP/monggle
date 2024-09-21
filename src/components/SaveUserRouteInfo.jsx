@@ -116,7 +116,7 @@ const SaveUserRouteInfo = () => {
             <img src={Home} alt="Home" />
           </div>
           <div>
-            <h1 className="font-bold text-secondary-200 text-lg pt-3 px-4">나만의 몽글로드 만들기</h1>
+            <h1 className="font-bold text-secondary-200 text-2xl pt-4 px-4 mb-2 font-Uhbee">나만의 몽글로드 만들기</h1>
           </div>
           <div className="flex flex-col gap-3 w-full justify-between">
             <input

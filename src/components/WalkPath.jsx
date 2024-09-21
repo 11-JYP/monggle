@@ -186,12 +186,13 @@ const DistanceInfo = ({ distance, handleReset }) => {
   const bycicleTime = Math.floor(distance / 227);
 
   return (
-    <ul className="dotOverlay distanceInfo" style={overlayStyle}>
-      <li>
-        <span className="label">총 거리</span> <span className="number">{displayDistance}</span>
+    <ul className="dotOverlay distanceInfo bg-white p-4 rounded-md">
+      <li className="mb-2">
+        <span className="label font-bold text-gray-600">총 거리</span>
+        <span className="number">{displayDistance}</span>
       </li>
-      <li>
-        <span className="label">도보</span>
+      <li className="mb-2">
+        <span className="label font-bold text-gray-600">도보</span>
         {walkTime > 60 ? (
           <>
             <span className="number">{Math.floor(walkTime / 60)}</span> 시간{" "}
@@ -199,8 +200,8 @@ const DistanceInfo = ({ distance, handleReset }) => {
         ) : null}
         <span className="number">{walkTime % 60}</span> 분
       </li>
-      <li>
-        <span className="label">자전거</span>
+      <li className="mb-2">
+        <span className="label font-bold text-gray-600">자전거</span>
         {bycicleTime > 60 ? (
           <>
             <span className="number">{Math.floor(bycicleTime / 60)}</span> 시간{" "}
@@ -209,31 +210,12 @@ const DistanceInfo = ({ distance, handleReset }) => {
         <span className="number">{bycicleTime % 60}</span> 분
       </li>
       <li>
-        <button style={resetButtonStyle} onClick={handleReset}>
+        <button className="resetBtn" onClick={handleReset}>
           다시 그리기
         </button>
       </li>
     </ul>
   );
-};
-
-// 스타일 부분 객체로 분리 -> 테일윈드 작업 필요!
-
-const resetButtonStyle = {
-  display: "inline-block",
-  width: "100px",
-  height: "50px",
-  margin: "10px auto",
-  backgroundColor: "#ff5c5c",
-  color: "white",
-  border: "none",
-  borderRadius: "5px",
-  cursor: "pointer"
-};
-
-const overlayStyle = {
-  backgroundColor: "white",
-  padding: "10px"
 };
 
 export default WalkPath;

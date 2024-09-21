@@ -30,7 +30,7 @@ const Nav = () => {
     <>
       <div className=" flex justify-between m-[16px] font-Uhbee">
         <div className="flex gap-3">
-          <div className="navToggleBtn" onClick={() => navigate("/main")}>
+          <div className="navToggleBtn bg-[#FFA500] text-white" onClick={() => navigate("/main")}>
             코스
           </div>
           <div className="navToggleBtn" onClick={() => navigate("/search")}>

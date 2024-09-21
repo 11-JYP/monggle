@@ -47,7 +47,11 @@
   }
 
   .puppyBtn {
-    @apply w-[120px] h-[40px] inline-block my-10 m-auto bg-[#FF7B00] text-white rounded-full border-none cursor-pointer;
+    @apply w-[120px] h-[40px] inline-block my-10 mb-2 mt-2 bg-[#FF7B00] text-white rounded-full border-none cursor-pointer;
+  }
+
+  .resetBtn {
+    @apply inline-block w-24 h-12 my-2 mx-auto bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition;
   }
 }
 

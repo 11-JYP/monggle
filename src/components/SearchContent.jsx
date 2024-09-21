@@ -225,7 +225,7 @@ const SearchContent = () => {
       />
       <div className="relative w-full h-screen">
         <Map center={state.center} style={{ width: "100%", height: "100vh" }} level={3} onCreate={setMap}>
-          <div className="flex gap-3 text-[14px] absolute top-0 left-0 z-10 p-4 w-full">
+          <div className="flex gap-3 absolute top-0 left-0 z-10 p-4 w-full m-[16px]">
             <button className="navToggleBtn" onClick={() => navigate("/main")}>
               코스
             </button>
@@ -237,6 +237,7 @@ const SearchContent = () => {
                 keyword={keyword}
                 setClickKeyword={setClickKeyword}
                 handleKeywordSelect={handleKeywordSelect}
+                clickKeyword={clickKeyword}
               />
             ))}
           </div>

@@ -3,7 +3,6 @@ import { CustomOverlayMap, Map, DrawingManager } from "react-kakao-maps-sdk";
 import routeDataStore from "../zustand/routeDataStore";
 import useCurrentLocation from "../hooks/useCurrentLocation";
 import loadingImage from "../assets/loadingImage.png";
-import userRouteStore from "../zustand/userRouteStore";
 
 // 경로 데이터 계산 및 저장 함수
 const useRouteData = (paths, distance) => {
@@ -75,15 +74,15 @@ const WalkPath = () => {
   if (!isLocationLoaded) {
     return (
       <div
-        className="flex justify-center align-middle w-1/3 ml-[15%]"
-        // style={{
-        //   display: "flex",
-        //   justifyContent: "end",
-        //   alignItems: "center",
-        //   width: "35%",
-        //   height: "100vh",
-        //   marginLeft: "15%"
-        // }}
+        // 이미지 고정값 때문에 이 부분만 style 직접 적용합니다
+        style={{
+          display: "flex",
+          justifyContent: "end",
+          alignItems: "center",
+          width: "35%",
+          height: "100vh",
+          marginLeft: "15%"
+        }}
       >
         <img src={loadingImage} alt="현재 위치를 불러오는 중..." />
       </div>
@@ -138,9 +137,9 @@ const WalkPath = () => {
     });
 
     const manager = managerRef.current;
-    manager.clear(); // 지도에서 그린 모든 선 제거
-    manager.cancel(); // 기존 그리기 취소
-    selectOverlay(); // 새로운 그리기 모드 시작
+    manager.clear();
+    manager.cancel();
+    selectOverlay();
   };
 
   return (
@@ -161,10 +160,10 @@ const WalkPath = () => {
         />
 
         <div>
-          <button onClick={selectOverlay} className="drawBtn bottom-[70px]">
+          <button onClick={selectOverlay} className="drawBtn bottom-[70px] font-Uhbee">
             선 그리기 시작
           </button>
-          <button onClick={handleDrawComplete} className="drawBtn bottom-[10px] bg-secondary-200">
+          <button onClick={handleDrawComplete} className="drawBtn bottom-[10px] bg-primary font-Uhbee">
             그리기 완료
           </button>
         </div>
@@ -186,7 +185,7 @@ const DistanceInfo = ({ distance, handleReset }) => {
   const bycicleTime = Math.floor(distance / 227);
 
   return (
-    <ul className="dotOverlay distanceInfo bg-white p-4 rounded-md">
+    <ul className="dotOverlay distanceInfo bg-white rounded-md">
       <li className="mb-2">
         <span className="label font-bold text-gray-600">총 거리</span>
         <span className="number">{displayDistance}</span>

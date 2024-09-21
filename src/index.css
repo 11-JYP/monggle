@@ -12,15 +12,16 @@
   font-style: normal;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Batang:wght@400;700&family=Noto+Sans+Warang+Citi&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   html,
-  body {
+  body,
+  #root,
+  .app {
+    font-family: "Pretendard-Regular";
     box-sizing: border-box;
     color: #333;
   }
@@ -43,7 +44,7 @@
     @apply h-10 border-[1px] border-solid border-gray-200 px-2 py-1.5 text-sm rounded-md focus:outline-secondary-200;
   }
   .drawBtn {
-    @apply w-[120px] h-[40px] inline-block my-10 m-auto bg-[#007bff] text-white rounded-full border-none cursor-pointer absolute right-[40px] z-10;
+    @apply w-[140px] h-[45px] inline-block my-10 m-auto bg-[#007bff] text-white rounded-full border-none cursor-pointer absolute right-[40px] z-10;
   }
 
   .puppyBtn {
@@ -51,7 +52,7 @@
   }
 
   .resetBtn {
-    @apply inline-block w-24 h-12 my-2 mx-auto bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition;
+    @apply inline-block w-24 h-10 my-2 mx-auto bg-red-500 text-white  rounded-md hover:bg-red-600 transition;
   }
 }
 
@@ -70,8 +71,8 @@
   border: 1px solid #ccc;
   border-bottom: 2px solid #ddd;
   float: left;
-  font-size: 12px;
-  padding: 5px;
+  font-size: 14px;
+  padding: 10px;
   background: #fff;
 }
 .dotOverlay:nth-of-type(n) {

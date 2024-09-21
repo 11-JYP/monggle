@@ -15,6 +15,7 @@ const Nav = () => {
     const confirmLogout = window.confirm("로그아웃 하시겠습니까?");
     if (confirmLogout) {
       logout();
+      navigate("/");
     }
   };
 
@@ -27,7 +28,7 @@ const Nav = () => {
 
   return (
     <>
-      <div className=" flex justify-between m-[16px]">
+      <div className=" flex justify-between m-[16px] font-Uhbee">
         <div className="flex gap-3">
           <div className="navToggleBtn bg-[#FFA500] text-white" onClick={() => navigate("/main")}>
             코스

@@ -33,18 +33,17 @@ const CanvasComponent = ({ size, coordinates }) => {
     ctx.beginPath();
 
     coordinates.forEach((coord, index) => {
-      const x = ((coord.lng - minLng) / (maxLng - minLng)) * usableWidth + padding; // X좌표 변환
-      const y = usableHeight - ((coord.lat - minLat) / (maxLat - minLat)) * usableHeight + padding; // Y좌표 변환
+      const x = ((coord.lng - minLng) / (maxLng - minLng)) * usableWidth + padding;
+      const y = usableHeight - ((coord.lat - minLat) / (maxLat - minLat)) * usableHeight + padding;
       if (index === 0) {
-        ctx.moveTo(x, y); // 첫 번째 점으로 이동
+        ctx.moveTo(x, y);
       } else {
-        ctx.lineTo(x, y); // 나머지 점으로 선 연결
+        ctx.lineTo(x, y);
       }
     });
-
-    ctx.strokeStyle = "#fff"; // 선 색상
-    ctx.lineWidth = 5; // 선 두께
-    ctx.stroke(); // 선 그리기
+    ctx.strokeStyle = "#FF7B00";
+    ctx.lineWidth = 4;
+    ctx.stroke();
   }, [coordinates, size]);
 
   return <canvas ref={canvasRef} />;

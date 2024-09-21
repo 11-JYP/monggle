@@ -265,7 +265,7 @@ const SearchContent = () => {
               {searchId === data.id && (
                 <CustomOverlayMap yAnchor={1.5} position={{ lat: data.y, lng: data.x }} clickable>
                   <div className="bg-white flex flex-col w-[300px] p-4 rounded-lg text-wrap shadow-lg">
-                    <strong className="text-primary mb-4 text-[24px] font-bold">{data.place_name}</strong>
+                    <strong className="text-primary mb-4 text-[24px] font-bold font-Uhbee">{data.place_name}</strong>
                     <p className="text-[16px] mb-4">{data.address_name}</p>
                     <div className="flex justify-between text-[14px]">
                       <span>{data.phone}</span>

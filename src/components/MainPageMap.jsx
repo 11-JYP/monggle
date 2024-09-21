@@ -13,7 +13,7 @@ const MainPageMap = ({ center }) => {
   const [selectedLineColor, setSelectedLineColor] = useState([]);
 
   useEffect(() => {
-    getGeoLocation(); // 페이지에서 위치 정보 가져오기
+    getGeoLocation();
 
     const API_URL = `http://localhost:4005/Route`;
 
@@ -81,12 +81,8 @@ const MainPageMap = ({ center }) => {
                 fillOpacity={0.7}
               />
               {overlayPositions[index] && (
-                <CustomOverlayMap
-                  position={overlayPositions[index]} // 각 폴리곤의 첫 번째 위치에 오버레이 표시
-                  yAnchor={0.5}
-                  xAnchor={0.5}
-                >
-                  <div className="w-full h-[30px] p-5 bg-white text-lg text-secondary-200 font-bold border-2 border-solid border-primary rounded-full flex items-center justify-center">
+                <CustomOverlayMap position={overlayPositions[index]} yAnchor={0.5} xAnchor={0.5}>
+                  <div className="w-full h-[30px] p-5 bg-white text-lg text-secondary-200 font-bold border-2 border-solid border-primary rounded-full flex items-center justify-center font-Uhbee">
                     {routeNames[index]}
                   </div>
                 </CustomOverlayMap>

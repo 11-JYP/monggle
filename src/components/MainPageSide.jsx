@@ -11,16 +11,15 @@ const MainPageSide = ({ updateMapCenter }) => {
   const [filteredRoutesInfo, setFilteredRoutesInfo] = useState([]);
   const [searchType, setSearchType] = useState("routeName");
 
-  // 페이지네이션 상태
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // 한 페이지에 보여줄 항목 수
+  const itemsPerPage = 5;
 
   useEffect(() => {
     const getRoutesInfo = async () => {
       try {
         const response = await axios.get("http://localhost:4005/Route");
         setRoutesInfo(response.data);
-        setFilteredRoutesInfo(response.data); // 초기화 시 필터된 값도 전체를 보여주기 위해 설정
+        setFilteredRoutesInfo(response.data);
       } catch (error) {
         console.log("데이터를 불러오지 못했습니다.", error);
       }
@@ -51,7 +50,6 @@ const MainPageSide = ({ updateMapCenter }) => {
   // 총 페이지 수 계산
   const totalPages = Math.ceil(filteredRoutesInfo.length / itemsPerPage);
 
-  // 현재 페이지에 해당하는 항목만 표시
   const currentItems = filteredRoutesInfo.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   // 페이지 번호 렌더링 함수
@@ -81,7 +79,7 @@ const MainPageSide = ({ updateMapCenter }) => {
         </div>
 
         <button
-          className="w-full h-[40px] bg-primary rounded-full text-white hover:bg-secondary-200 transition-all"
+          className="w-full h-[45px] bg-primary rounded-full text-white hover:bg-secondary-200 transition-all font-Uhbee"
           onClick={() => navigate("/walkpath")}
         >
           산책로 만들기
@@ -142,7 +140,7 @@ const MainPageSide = ({ updateMapCenter }) => {
               className="mx-2 mb-4 border-[1px] border-solid border-gray-200 rounded-md cursor-pointer hover:border-secondary-200 transition-all"
               onClick={() => updateMapCenter(info.paths[0])}
             >
-              <h1 className="font-bold text-secondary-200 text-lg pt-4 px-4">{info.routeName}</h1>
+              <h1 className="font-bold text-secondary-200 text-lg py-3 px-4 font-Uhbee">{info.routeName}</h1>
               <p className="py-2 px-4">{info.address}</p>
               <span className="text-gray-600 text-sm px-4">{info.description}</span>
               <p>{info.region}</p>
@@ -153,11 +151,11 @@ const MainPageSide = ({ updateMapCenter }) => {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500">검색 결과가 없습니다.</p>
+          <p className="text-center text-gray-500 font-Uhbee">검색 결과가 없습니다.</p>
         )}
       </div>
 
-      <div className="flex justify-center my-4">{renderPageNumbers()}</div>
+      <div className="flex justify-center my-4 font-Uhbee">{renderPageNumbers()}</div>
     </div>
   );
 };

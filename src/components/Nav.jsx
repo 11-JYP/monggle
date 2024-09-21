@@ -28,7 +28,7 @@ const Nav = () => {
 
   return (
     <>
-      <div className=" flex justify-between m-[16px]">
+      <div className=" flex justify-between m-[16px] font-Uhbee">
         <div className="flex gap-3">
           <div className="navToggleBtn" onClick={() => navigate("/main")}>
             코스

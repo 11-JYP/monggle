@@ -3,7 +3,7 @@ import routeDataStore from "../zustand/routeDataStore";
 import { createRouteInfo } from "../api/pathDataSave";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../zustand/authStore";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Home from "../assets/home.png";
 const SaveUserRouteInfo = () => {
   const navigate = useNavigate();
@@ -16,7 +16,6 @@ const SaveUserRouteInfo = () => {
   const [isColorClicked, setIsColorClicked] = useState(false);
   const selectColor = ["#FF7F50", "#50d0ff", "#ffd750", "#ff5079", "#BCEE68"];
 
-  // store에서 객체형태로 불러와서 한번에 넘겨버려
   const { routeName, address, description, selectedPuppy, selectedLineColor, setUserRouteData } = userRouteStore(
     (state) => ({
       routeName: state.routeFormData.routeName,

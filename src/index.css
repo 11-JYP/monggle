@@ -18,7 +18,10 @@
 
 @layer base {
   html,
-  body {
+  body,
+  #root,
+  .app {
+    font-family: "Pretendard-Regular";
     box-sizing: border-box;
     color: #333;
   }

@@ -182,7 +182,7 @@ const SaveUserRouteInfo = () => {
               ))}
             </div>
           </div>
-          <div className="bg-slate-100 rounded-lg flex justify-center gap-10 py-3 w-full text-sm ">
+          <div className="bg-slate-100 rounded-lg flex justify-center gap-10 py-3 w-3/4 text-sm ">
             <div className="flex flex-col gap-4">
               <p className="font-bold">거리</p>
               <p>{Math.floor(routeData.totalDistance) ? Math.floor(routeData.totalDistance) + " m" : "계산중..."}</p>

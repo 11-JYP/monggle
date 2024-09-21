@@ -117,7 +117,6 @@ const SearchContent = () => {
     e.preventDefault();
     searchKeyword();
   };
-  //민지님 코드
 
   const searchPlaces = (center, page) => {
     if (!state.center) return;
@@ -134,13 +133,11 @@ const SearchContent = () => {
       categoryKeyword,
       (data, status, categorypagination) => {
         if (status === kakao.maps.services.Status.OK) {
-          // setPlaces(data);
           setSearch(data);
           displayPlaces(data);
           const bounds = new kakao.maps.LatLngBounds();
           data.forEach((item) => bounds.extend(new kakao.maps.LatLng(item.y, item.x)));
           map.setBounds(bounds);
-          // setCategoryPagination(categorypagination);
 
           // 페이지네이션 객체 저장
           setPagination({
@@ -164,8 +161,6 @@ const SearchContent = () => {
     bounds.extend(new kakao.maps.LatLng(state.center.lat, state.center.lng));
     map.setBounds(bounds);
     setSearch(data);
-
-    console.log(data);
   };
 
   // 좌표값 설정
@@ -182,8 +177,6 @@ const SearchContent = () => {
       lat: centerLatLng.getLat(),
       lng: centerLatLng.getLng()
     };
-    console.log(centerLatLng);
-    console.log(newCenter);
     setCurrentPage(1);
     searchPlaces(newCenter, 1);
     setLastCenter(newCenter);
@@ -205,12 +198,6 @@ const SearchContent = () => {
     if (lastCenter) {
       searchPlaces(lastCenter, currentPage);
     }
-    // else {
-    //   console.log("22222");
-
-    //   console.log("search :>> ", search);
-    //   searchPlaces(state.center, currentPage);
-    // }
   }, [map, categoryKeyword, currentPage]);
 
   useEffect(() => {
@@ -237,14 +224,9 @@ const SearchContent = () => {
         moveLatLng={moveLatLng}
       />
       <div className="relative w-full h-screen">
-        <Map
-          center={state.center}
-          style={{ width: "100%", height: "calc(100vh - 109px)", marginTop: "48px" }}
-          level={3}
-          onCreate={setMap}
-        >
-          <div className="flex absolute top-0 left-0 z-10 p-4 w-full">
-            <button className="navToggleBtn" onClick={() => navigate("/")}>
+        <Map center={state.center} style={{ width: "100%", height: "100vh" }} level={3} onCreate={setMap}>
+          <div className="flex gap-3 text-[14px] absolute top-0 left-0 z-10 p-4 w-full">
+            <button className="navToggleBtn" onClick={() => navigate("/main")}>
               코스
             </button>
             <button className="navToggleBtn" onClick={handleReSearch}>
@@ -280,13 +262,17 @@ const SearchContent = () => {
                 }}
               />
               {searchId === data.id && (
-                <CustomOverlayMap yAnchor={2.1} position={{ lat: data.y, lng: data.x }} clickable>
-                  <p>{data.place_name}</p>
-                  <strong>{data.address_name}</strong>
-                  <span>{data.phone}</span>
-                  <a href={data.place_url} target="_blank">
-                    주소
-                  </a>
+                <CustomOverlayMap yAnchor={1.5} position={{ lat: data.y, lng: data.x }} clickable>
+                  <div className="bg-white flex flex-col w-[300px] p-4 rounded-lg text-wrap shadow-lg">
+                    <strong className="text-primary mb-4 text-[24px] font-bold">{data.place_name}</strong>
+                    <p className="text-[16px] mb-4">{data.address_name}</p>
+                    <div className="flex justify-between text-[14px]">
+                      <span>{data.phone}</span>
+                      <a href={data.place_url} target="_blank">
+                        홈페이지
+                      </a>
+                    </div>
+                  </div>
                 </CustomOverlayMap>
               )}
             </React.Fragment>

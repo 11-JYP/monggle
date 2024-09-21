@@ -14,7 +14,7 @@ const Home = () => {
       <Link to="/main" className="mb-16">
         <img src={home} alt="home.png" className="w-96 object-contain m-auto" />
       </Link>
-      <h1 className="text-secondary-200 text-xl">로고를 클릭해주세요!</h1>
+      <h1 className="text-secondary-200 text-xl font-Uhbee">로고를 클릭해주세요!</h1>
     </motion.div>
   );
 };

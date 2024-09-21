@@ -37,7 +37,7 @@ const SearchList = ({ handleSubmit, keyword, setKeyword, search, pagination, sea
         </form>
       </div>
 
-      <div ref={scroll} className="mt-2 overflow-scroll scroll-smooth h-[100vh]">
+      <div ref={scroll} className="mt-2 overflow-x-auto scroll-smooth h-[100vh]">
         {search.length > 0 ? (
           search.map((place, index) => (
             <div

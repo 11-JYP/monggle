@@ -188,7 +188,8 @@ const DistanceInfo = ({ distance, handleReset }) => {
   return (
     <ul className="dotOverlay distanceInfo bg-white p-4 rounded-md">
       <li className="mb-2">
-        <span className="label font-bold text-gray-600">총 거리</span> <span className="number">{displayDistance}</span>
+        <span className="label font-bold text-gray-600">총 거리</span>
+        <span className="number">{displayDistance}</span>
       </li>
       <li className="mb-2">
         <span className="label font-bold text-gray-600">도보</span>

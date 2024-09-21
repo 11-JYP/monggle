@@ -109,13 +109,13 @@ const SaveUserRouteInfo = () => {
 
   return (
     <form onSubmit={handleRouteFormSubmit}>
-      <div className="sideContainer">
-        <div className="flex flex-col justify-center items-center gap-6 m-[20px]">
+      <div className="sideContainer flex flex-col max-h-screen overflow-y-auto">
+        <div className="flex flex-col justify-center items-center gap-6 m-[20px] ">
           <div className="w-20 py-4">
             <img src={Home} alt="Home" />
           </div>
           <div>
-            <h1 className="font-bold text-secondary-200 text-2xl pt-4 px-4 mb-2 font-Uhbee">나만의 몽글로드 만들기</h1>
+            <h1 className="font-bold text-secondary-200 text-2xl font-Uhbee">나만의 몽글로드 만들기</h1>
           </div>
           <div className="flex flex-col gap-3 w-full justify-between">
             <input
@@ -139,7 +139,7 @@ const SaveUserRouteInfo = () => {
               name="description"
               placeholder="코스를 설명해주세요"
               onChange={handleInputChange}
-              className="input w-full min-h-20"
+              className="input w-full min-h-20 resize-none"
               maxLength={100}
               ref={descriptionRef}
             />
@@ -182,19 +182,19 @@ const SaveUserRouteInfo = () => {
             </div>
           </div>
           <div className="bg-slate-100 rounded-lg flex justify-center gap-10 py-3 w-3/4 text-sm ">
-            <div className="flex flex-col gap-4">
-              <p className="font-bold">거리</p>
+            <div className="flex flex-col gap-4 text-center">
+              <p className="font-bold">예상 거리</p>
               <p>{Math.floor(routeData.totalDistance) ? Math.floor(routeData.totalDistance) + " m" : "계산중..."}</p>
             </div>
-            <div className="flex flex-col gap-4">
-              <p className="font-bold">예상시간</p>
+            <div className="flex flex-col gap-4 text-center">
+              <p className="font-bold">예상 시간</p>
               <p>{routeData.totalWalkkTime ? routeData.totalWalkkTime + " 분" : "계산중..."}</p>
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full h-[40px] bg-primary rounded-full text-white hover:bg-secondary-200 transition-all"
+            className="w-full h-[45px] bg-primary rounded-full text-white hover:bg-secondary-200 transition-all font-Uhbee"
           >
             코스 생성하기
           </button>
@@ -205,12 +205,3 @@ const SaveUserRouteInfo = () => {
 };
 
 export default SaveUserRouteInfo;
-
-// const textAreaStyle = {
-//   border: "1px solid #dddddd",
-//   padding: "10px 8px",
-//   minHeight: "100px",
-//   fontSize: "14px",
-//   borderRadius: "2px",
-//   resize: "none"
-// };

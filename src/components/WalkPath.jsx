@@ -3,6 +3,7 @@ import { CustomOverlayMap, Map, DrawingManager } from "react-kakao-maps-sdk";
 import routeDataStore from "../zustand/routeDataStore";
 import useCurrentLocation from "../hooks/useCurrentLocation";
 import loadingImage from "../assets/loadingImage.png";
+import userRouteStore from "../zustand/userRouteStore";
 
 // 경로 데이터 계산 및 저장 함수
 const useRouteData = (paths, distance) => {
@@ -143,7 +144,7 @@ const WalkPath = () => {
   };
 
   return (
-    <>
+    <div className="relative w-full h-screen">
       <Map id="map" center={location} style={{ width: "100%", height: "100vh" }} level={3}>
         <DrawingManager
           ref={managerRef}
@@ -153,7 +154,7 @@ const WalkPath = () => {
             draggable: true,
             removable: true,
             editable: true,
-            strokeColor: "#39f",
+            strokeColor: "#FF7F50",
             hintStrokeStyle: "dash",
             hintStrokeOpacity: 0.5
           }}
@@ -174,7 +175,7 @@ const WalkPath = () => {
           </CustomOverlayMap>
         )}
       </Map>
-    </>
+    </div>
   );
 };
 

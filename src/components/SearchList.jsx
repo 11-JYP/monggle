@@ -29,7 +29,7 @@ const SearchList = ({ handleSubmit, keyword, setKeyword, search, pagination, sea
             />
             <button
               type="submit"
-              className="bg-primary px-2 rounded-md text-sm text-white font-semibold hover:bg-secondary-200 transition-all"
+              className="bg-primary px-2 rounded-md text-sm font-Uhbee text-white font-semibold hover:bg-secondary-200 transition-all"
             >
               검색
             </button>
@@ -52,7 +52,7 @@ const SearchList = ({ handleSubmit, keyword, setKeyword, search, pagination, sea
                 }
               }}
             >
-              <h1 className="font-bold text-secondary-200 text-lg pt-4 px-4">{place.place_name}</h1>
+              <h1 className="font-bold font-Uhbee text-secondary-200 text-lg pt-4 px-4">{place.place_name}</h1>
               <p className="py-2 px-4">{place.road_address_name}</p>
 
               <div className="bg-secondary-100 flex justify-between gap-4 p-4 mt-2 rounded-b-md font-bold text-secondary-200">

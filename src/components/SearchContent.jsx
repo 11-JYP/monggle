@@ -225,7 +225,7 @@ const SearchContent = () => {
       />
       <div className="relative w-full h-screen">
         <Map center={state.center} style={{ width: "100%", height: "100vh" }} level={3} onCreate={setMap}>
-          <div className="flex gap-3 absolute top-0 left-0 z-10 p-4 w-full m-[16px]">
+          <div className="flex gap-3 absolute top-0 left-0 z-10 p-4 w-full m-[16px] font-Uhbee">
             <button className="navToggleBtn" onClick={() => navigate("/main")}>
               코스
             </button>

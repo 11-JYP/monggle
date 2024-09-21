@@ -4,7 +4,7 @@ import { createRouteInfo } from "../api/pathDataSave";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../zustand/authStore";
 import { useEffect, useRef, useState } from "react";
-
+import Home from "../assets/home.png";
 const SaveUserRouteInfo = () => {
   const navigate = useNavigate();
   const { user } = useAuthStore();
@@ -29,10 +29,6 @@ const SaveUserRouteInfo = () => {
   );
 
   const routeData = routeDataStore((state) => state.routeData) || {}; // 초기값을 빈 객체로 설정
-
-  useEffect(() => {
-    console.log("색상:", selectedLineColor);
-  }, [selectedLineColor]);
 
   // 입력 값 변경 핸들러
   const handleInputChange = (e) => {
@@ -114,43 +110,46 @@ const SaveUserRouteInfo = () => {
 
   return (
     <form onSubmit={handleRouteFormSubmit}>
-      <div className="flex flex-col justify-center items-center gap-10 m-20">
-        <div>
-          <h1>나만의 몽글로드 만들기</h1>
-        </div>
-        <div className="flex flex-col gap-5">
-          <input
-            value={routeName}
-            name="routeName"
-            placeholder="코스명을 입력하세요"
-            onChange={handleInputChange}
-            className="input"
-            ref={routeNameRef}
-          />
-          <input
-            value={address}
-            name="address"
-            placeholder="주소"
-            onChange={handleInputChange}
-            className="input"
-            ref={addressRef}
-          />
-          <textarea
-            value={description}
-            name="description"
-            placeholder="코스를 설명해주세요"
-            onChange={handleInputChange}
-            maxLength={100}
-            style={textAreaStyle}
-            ref={descriptionRef}
-          />
+      <div className="sideContainer">
+        <div className="flex flex-col justify-center items-center gap-6 m-[20px]">
+          <div className="w-20 py-4">
+            <img src={Home} alt="Home" />
+          </div>
           <div>
+            <h1 className="font-bold text-secondary-200 text-lg pt-4 px-4">나만의 몽글로드 만들기</h1>
+          </div>
+          <div className="flex flex-col gap-5 w-full justify-between">
+            <input
+              value={routeName}
+              name="routeName"
+              placeholder="코스명을 입력하세요"
+              onChange={handleInputChange}
+              className="input w-full"
+              ref={routeNameRef}
+            />
+            <input
+              value={address}
+              name="address"
+              placeholder="주소"
+              onChange={handleInputChange}
+              className="input w-full"
+              ref={addressRef}
+            />
+            <textarea
+              value={description}
+              name="description"
+              placeholder="코스를 설명해주세요"
+              onChange={handleInputChange}
+              className="input w-full min-h-20"
+              maxLength={100}
+              ref={descriptionRef}
+            />
+          </div>
+          <div className="flex justify-center gap-4 mt-2">
             <button
               type="button"
               value="smallPuppy"
-              className={`p-3 rounded text-white ${
-                clickedPuppy === "smallPuppy" ? "bg-orange-400" : "bg-gray-400"
-              } text-center w-28 m-auto`}
+              className={`puppyBtn ${clickedPuppy === "smallPuppy" ? "bg-primary" : "bg-gray-400"}`}
               onClick={handleSelectPuppy}
             >
               소형견
@@ -158,43 +157,49 @@ const SaveUserRouteInfo = () => {
             <button
               type="button"
               value="bigPuppy"
-              className={`p-3 rounded text-white ${
-                clickedPuppy === "bigPuppy" ? "bg-orange-400" : "bg-gray-400"
-              } text-center w-28 m-auto`}
+              className={`puppyBtn ${clickedPuppy === "bigPuppy" ? "bg-primary" : "bg-gray-400"}`}
               onClick={handleSelectPuppy}
             >
               대형견
             </button>
           </div>
           <div>
-            {selectColor.map((lineColor) => (
-              <button
-                key={lineColor}
-                value={lineColor}
-                type="button"
-                style={{
-                  backgroundColor: lineColor,
-                  border: isColorClicked === lineColor ? `3px ${lineColor + 80} solid` : "none"
-                }}
-                className="p-3 rounded text-white text-center w-5 gap-30 m-auto"
-                onClick={handleSelectColor}
-              ></button>
-            ))}
+            <hi className="flex justify-center font-bold">선 색상선택 (디폴트 : 오렌지)</hi>
+            <span className="flex justify-center text-sm text-gray-500 gap-4 mt-2 "> * 그리기 완료 후 반영됩니다</span>
+            <div className="flex justify-center gap-4 mt-5 min-h-8">
+              {selectColor.map((lineColor) => (
+                <button
+                  key={lineColor}
+                  value={lineColor}
+                  type="button"
+                  style={{
+                    backgroundColor: lineColor,
+                    border: isColorClicked === lineColor ? `3px ${lineColor + "80"} solid` : "none"
+                  }}
+                  className="p-3 rounded  w-5  m-auto"
+                  onClick={handleSelectColor}
+                ></button>
+              ))}
+            </div>
           </div>
+          <div className="bg-slate-100 rounded-lg flex justify-center gap-10 py-3 w-3/4 text-sm ">
+            <div className="flex flex-col gap-4">
+              <p className="font-bold">거리</p>
+              <p>{Math.floor(routeData.totalDistance) ? Math.floor(routeData.totalDistance) + " m" : "계산중..."}</p>
+            </div>
+            <div className="flex flex-col gap-4">
+              <p className="font-bold">예상시간</p>
+              <p>{routeData.totalWalkkTime ? routeData.totalWalkkTime + " 분" : "계산중..."}</p>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full h-[40px] bg-primary rounded-full text-white hover:bg-secondary-200 transition-all"
+          >
+            코스 생성하기
+          </button>
         </div>
-        <div className="bg-slate-100 rounded-lg flex justify-center gap-10 py-3 w-full text-sm ">
-          <div className="flex flex-col gap-4">
-            <p>거리</p>
-            <p>{Math.floor(routeData.totalDistance) ? Math.floor(routeData.totalDistance) + " m" : "계산중..."}</p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <p>예상시간</p>
-            <p>{routeData.totalWalkkTime ? routeData.totalWalkkTime + " 분" : "계산중..."}</p>
-          </div>
-        </div>
-      </div>
-      <div className="p-3 rounded text-white bg-orange-400 text-center w-28 m-auto">
-        <button type="submit">코스 생성하기</button>
       </div>
     </form>
   );
@@ -202,11 +207,11 @@ const SaveUserRouteInfo = () => {
 
 export default SaveUserRouteInfo;
 
-const textAreaStyle = {
-  border: "1px solid #dddddd",
-  padding: "10px 8px",
-  minHeight: "100px",
-  fontSize: "14px",
-  borderRadius: "2px",
-  resize: "none"
-};
+// const textAreaStyle = {
+//   border: "1px solid #dddddd",
+//   padding: "10px 8px",
+//   minHeight: "100px",
+//   fontSize: "14px",
+//   borderRadius: "2px",
+//   resize: "none"
+// };

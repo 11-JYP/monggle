@@ -43,6 +43,10 @@
   .drawBtn {
     @apply w-[120px] h-[40px] inline-block my-10 m-auto bg-[#007bff] text-white rounded-full border-none cursor-pointer absolute right-[40px] z-10;
   }
+
+  .puppyBtn {
+    @apply w-[120px] h-[40px] inline-block my-10 m-auto bg-[#FF7B00] text-white rounded-full border-none cursor-pointer;
+  }
 }
 
 /* 경로 css */

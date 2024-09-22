@@ -15,7 +15,7 @@ const MainPageMap = ({ center }) => {
   useEffect(() => {
     getGeoLocation();
 
-    const API_URL = `http://localhost:4005/Route`;
+    const API_URL = `https://best-fresh-mojoceratops.glitch.me/Route`;
 
     const getRouteData = async () => {
       try {

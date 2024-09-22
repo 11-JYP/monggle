@@ -17,7 +17,7 @@ const MainPageSide = ({ updateMapCenter }) => {
   useEffect(() => {
     const getRoutesInfo = async () => {
       try {
-        const response = await axios.get("http://localhost:4005/Route");
+        const response = await axios.get("https://best-fresh-mojoceratops.glitch.me/Route");
         setRoutesInfo(response.data);
         setFilteredRoutesInfo(response.data);
       } catch (error) {

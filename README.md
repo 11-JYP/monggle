@@ -116,15 +116,16 @@
 
 #### NAV BAR 를 통한 카테고리 검색 (애견카페/동물병원/애견호텔)
 
-> ![](https://velog.velcdn.com/images/star1024/post/725cf57f-95d2-4539-8c3e-0e7f2777dcb5/image.gif)
+>![](https://velog.velcdn.com/images/star1024/post/eded5887-a897-437a-87a4-1e480de126b0/image.gif)
 > NAV 바를 이용해서 지정된 위치의 애견카페, 동물병원, 애견호텔을 검색할 수 있다.
 
 #### 지역별 애견카페/동물병원/애견호텔 검색
 
-> ![](https://velog.velcdn.com/images/star1024/post/0f54c722-d3a9-486f-97d3-2760b4bea407/image.gif)
+> ![](https://velog.velcdn.com/images/star1024/post/5553d9aa-d807-4348-8b2d-2f529b1f55a4/image.gif)
 > 지역 검색을 통해 원하는 지역의 애견카페, 동물병원, 애견호텔을 검색할 수 있다.<br/>
 
-> ![](https://velog.velcdn.com/images/star1024/post/08c06c98-ae22-4793-a476-3f79c2e25d68/image.gif)
+
+>![](https://velog.velcdn.com/images/star1024/post/a934c03f-5564-4326-a266-97a8d5d5de09/image.gif)
 > `페이지네이션`을 통해 검색결과가 랜더링 되도록 처리했다<br/>
 
 ### 3. 산책로 페이지
@@ -136,12 +137,14 @@
 
 #### 몽글로드 만들기
 
-> ![](https://velog.velcdn.com/images/star1024/post/46c37a7d-04ca-414a-b782-e9d34fe10785/image.gif) >
+> ![image](https://github.com/user-attachments/assets/63abb54f-61d6-42d6-8b26-f95f45144d3a)
 > `카카오 선 그리기 API`, `Drawing Manager`를 사용해 몽글로드를 그릴 수 있다.<br/>
 > 그리는 도중 언제든지 새로운 점을 이용해 도형을 자유롭게 그릴 수 있다. 맵에 보여질 몽글로드의 색상을 선택할 수 있다.<br/>
 > `Zustand`을 이용해 데이터를 전역적으로 관리하여 저장할 수 있도록 구현.<br/>
 
-> ![](https://velog.velcdn.com/images/star1024/post/45722b59-cc58-42a6-92d0-25d9b15787db/image.gif)
+> ![Uploading image.png…]()
+
+
 > 몽글로드를 그리는 도중, `다시 그리기` 혹은 `ESC 키`를 이용해 선을 처음부터 다시 그릴 수 있다.<br/> 
 
 ## 🏹 트러블 슈팅

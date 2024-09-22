@@ -1,4 +1,4 @@
-import SaveUserRouteInfo from "../components/saveUserRouteInfo";
+import SaveUserRouteInfo from "../components/SaveUserRouteInfo";
 import WalkPath from "../components/WalkPath";
 
 const WalkPathPage = () => {

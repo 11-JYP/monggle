@@ -124,33 +124,32 @@
 > ![](https://velog.velcdn.com/images/star1024/post/5553d9aa-d807-4348-8b2d-2f529b1f55a4/image.gif)
 > 지역 검색을 통해 원하는 지역의 애견카페, 동물병원, 애견호텔을 검색할 수 있다.<br/>
 
-
->![](https://velog.velcdn.com/images/star1024/post/a934c03f-5564-4326-a266-97a8d5d5de09/image.gif)
+> ![page_mini](https://github.com/user-attachments/assets/5e933ff0-c719-47d2-af87-3637502e816b)
 > `페이지네이션`을 통해 검색결과가 랜더링 되도록 처리했다<br/>
 
 ### 3. 산책로 페이지
 
 #### 생성된 몽글로드 검색
 
-> ![](https://velog.velcdn.com/images/star1024/post/a3060f13-1c54-40b1-97fc-2653f177716c/image.gif)
+> ![search_road](https://github.com/user-attachments/assets/687d2a8b-e2bc-4a47-9aea-d70bf4b59d3f)
 > DB에 저장된 모든 몽글로드를 검색할 수 있다.<br/>
 
 #### 몽글로드 만들기
 
-> ![image](https://github.com/user-attachments/assets/63abb54f-61d6-42d6-8b26-f95f45144d3a)
+> ![drawing_save (1)](https://github.com/user-attachments/assets/51f78dc9-278f-4806-821e-c6a44df84d1c)
 > `카카오 선 그리기 API`, `Drawing Manager`를 사용해 몽글로드를 그릴 수 있다.<br/>
 > 그리는 도중 언제든지 새로운 점을 이용해 도형을 자유롭게 그릴 수 있다. 맵에 보여질 몽글로드의 색상을 선택할 수 있다.<br/>
 > `Zustand`을 이용해 데이터를 전역적으로 관리하여 저장할 수 있도록 구현.<br/>
 
-> ![Uploading image.png…]()
-
-
+> ![draw_reset](https://github.com/user-attachments/assets/125eb856-f295-47bf-ad97-15c3e216f5e0)
 > 몽글로드를 그리는 도중, `다시 그리기` 혹은 `ESC 키`를 이용해 선을 처음부터 다시 그릴 수 있다.<br/> 
 
 ## 🏹 트러블 슈팅
 
-### 데이터가 **undefined**로 저장되는 상황
-
+<details>
+<summary>데이터가 undefined로 저장되는 상황</summary>
+<br/>
+  
 ![](https://velog.velcdn.com/images/star1024/post/cf0ebbba-6262-48b4-a145-e6310d4ebac5/image.png)
 <br/>
 <br/>
@@ -162,8 +161,7 @@
 - `Zustand` 상태 불러오기 방식 수정: Zustand의 상태를 가져올 때, 기존처럼 개별적으로 가져오는 대신
   하나의 객체로 가져오도록 수정했다.<br/>
   ![](https://velog.velcdn.com/images/star1024/post/78cdb36f-1122-46f0-ad81-3e50e2aefca3/image.png)
-
-###
+</details>
 
 <br/>
 

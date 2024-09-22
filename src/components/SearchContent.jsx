@@ -67,10 +67,7 @@ const SearchContent = () => {
           data.forEach((item) => bounds.extend(new kakao.maps.LatLng(item.y, item.x)));
           map.setBounds(bounds);
 
-          console.log("dddd location.lat :>> ", location.lat);
-
           // 검색 기준 현재 위치 last좌표 저장
-          const centerLatLng = map.getCenter();
           const newCenter = {
             lat: location.lat,
             lng: location.lng
@@ -234,6 +231,7 @@ const SearchContent = () => {
             </button>
             {KEYWORD_LIST.map((keyword) => (
               <CategorySearch
+                key={keyword.id}
                 keyword={keyword}
                 setClickKeyword={setClickKeyword}
                 handleKeywordSelect={handleKeywordSelect}

@@ -69,7 +69,7 @@ const MainPageSide = ({ updateMapCenter }) => {
     return pageNumbers;
   };
 
-  const placeholderText = searchType === "routeName" ? "산책 이름을 입력해주세요." : "지역명을 입력해주세요.";
+  const placeholderText = searchType === "routeName" ? "몽글로드를 입력해주세요." : "지역명을 입력해주세요.";
 
   return (
     <div className="sideContainer">
@@ -82,7 +82,7 @@ const MainPageSide = ({ updateMapCenter }) => {
           className="w-full h-[45px] bg-primary rounded-full text-white hover:bg-secondary-200 transition-all font-Uhbee"
           onClick={() => navigate("/walkpath")}
         >
-          산책로 만들기
+          몽글로드 만들기
         </button>
 
         <form onSubmit={handleSearchSubmit} className="w-full">
@@ -99,7 +99,7 @@ const MainPageSide = ({ updateMapCenter }) => {
                 setSearchInput("");
               }}
             >
-              산책이름
+              몽글로드
             </button>
             <button
               type="button"

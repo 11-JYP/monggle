@@ -1,5 +1,3 @@
-import React, { useEffect, useRef, useState } from "react";
-
 const SearchPagination = ({ currentPage, lastPage, onPageChange, scrollToTop }) => {
   const handlePageClick = (page) => {
     if (page !== currentPage) {

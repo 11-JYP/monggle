@@ -18,7 +18,6 @@ const useRouteData = (paths, distance) => {
         totalDistance, // 총 거리 저장
         totalWalkkTime: walkTime // 계산된 걷는 시간 저장
       });
-      console.log("루트 데이터 저장 완료:", paths, totalDistance, walkTime);
     }
   }, [paths, distance, setRouteData]);
 };

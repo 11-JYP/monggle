@@ -89,8 +89,6 @@ const SaveUserRouteInfo = () => {
       return;
     }
 
-    console.log("제출할 데이터:", userRouteAllData); // 제출 전 확인
-
     try {
       await createRouteInfo(userRouteAllData);
       alert("루트 정보 저장 완료!");
@@ -112,10 +110,10 @@ const SaveUserRouteInfo = () => {
       <div className="sideContainer flex flex-col max-h-screen overflow-y-auto">
         <div className="flex flex-col justify-center items-center gap-6 m-[20px] ">
           <div className="w-20 py-4">
-            <img src={Home} alt="Home" />
+            <img src={Home} alt="Home" onClick={() => navigate("/main")} />
           </div>
           <div>
-            <h1 className="font-bold text-secondary-200 text-2xl font-Uhbee">나만의 몽글로드 만들기</h1>
+            <div className="font-bold text-secondary-200 text-2xl font-Uhbee">나만의 몽글로드 만들기</div>
           </div>
           <div className="flex flex-col gap-3 w-full justify-between">
             <input
@@ -163,7 +161,7 @@ const SaveUserRouteInfo = () => {
             </button>
           </div>
           <div>
-            <hi className="flex justify-center font-bold">선 색상선택 (디폴트 : 오렌지)</hi>
+            <div className="flex justify-center font-bold">선 색상선택 (기본 : 오렌지)</div>
             <span className="flex justify-center text-sm text-gray-500 gap-4 mt-2 "> * 그리기 완료 후 반영됩니다</span>
             <div className="flex justify-center gap-4 mt-5 min-h-8">
               {selectColor.map((lineColor) => (
@@ -196,7 +194,7 @@ const SaveUserRouteInfo = () => {
             type="submit"
             className="w-full h-[45px] bg-primary rounded-full text-white hover:bg-secondary-200 transition-all font-Uhbee"
           >
-            코스 생성하기
+            로드 만들기
           </button>
         </div>
       </div>

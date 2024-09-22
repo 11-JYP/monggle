@@ -2,13 +2,11 @@ import baseInstance from "../axiosInstance/join";
 
 export const register = async (userData) => {
   const response = await baseInstance.post("/register", userData);
-  console.log(response.data);
   return response.data;
 };
 
 export const login = async (userData) => {
   const response = await baseInstance.post("/login", userData);
-  console.log(response.data);
   return response.data;
 };
 

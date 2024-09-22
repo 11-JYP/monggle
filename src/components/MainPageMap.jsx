@@ -34,7 +34,6 @@ const MainPageMap = ({ center }) => {
 
         // 각 routeName을 추출하여 상태에 저장
         setRouteNames(names);
-        console.log(routeNames);
 
         // 선 색 저장
         setSelectedLineColor(lineColor);

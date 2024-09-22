@@ -8,7 +8,7 @@ const Login = () => {
 
   const handleLogin = async (formData) => {
     await login(formData);
-    navigate("/walkpath");
+    navigate("/main");
   };
 
   return (

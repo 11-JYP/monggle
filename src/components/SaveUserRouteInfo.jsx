@@ -16,8 +16,9 @@ const SaveUserRouteInfo = () => {
   const [isColorClicked, setIsColorClicked] = useState(false);
   const selectColor = ["#FF7F50", "#50d0ff", "#ffd750", "#ff5079", "#BCEE68"];
 
-  const { routeName, address, description, selectedPuppy, selectedLineColor, setUserRouteData } = userRouteStore(
+  const { id, routeName, address, description, selectedPuppy, selectedLineColor, setUserRouteData } = userRouteStore(
     (state) => ({
+      id: state.routeFormData.id,
       routeName: state.routeFormData.routeName,
       address: state.routeFormData.address,
       description: state.routeFormData.description,
@@ -56,7 +57,8 @@ const SaveUserRouteInfo = () => {
 
     // 모든 입력 데이터를 하나로 통합하여 서버에 전송
     const userRouteAllData = {
-      id: user.id,
+      id,
+      userId: user.id,
       nickname: user.nickname,
       routeName,
       address,

@@ -1,3 +1,172 @@
 {
-  "Route": []
+  "Route": [
+    {
+      "id": "useruser",
+      "nickname": "이매동꼬부기",
+      "routeName": "d",
+      "address": "d",
+      "description": "d",
+      "selectedPuppy": "bigPuppy",
+      "selectedLineColor": "#50d0ff",
+      "paths": [
+        {
+          "lat": 37.41413199562753,
+          "lng": 127.13089847624121
+        },
+        {
+          "lat": 37.414142151847074,
+          "lng": 127.12985925884733
+        },
+        {
+          "lat": 37.41500691694621,
+          "lng": 127.13005278658355
+        },
+        {
+          "lat": 37.41496927688652,
+          "lng": 127.13149862966489
+        },
+        {
+          "lat": 37.41413199562753,
+          "lng": 127.13089847624121
+        }
+      ],
+      "totalDistance": 424.6035567163136,
+      "totalWalkkTime": 6
+    },
+    {
+      "id": "useruser",
+      "nickname": "이매동꼬부기",
+      "routeName": "ㅇ",
+      "address": "ㅇ",
+      "description": "ㅇ",
+      "selectedPuppy": "bigPuppy",
+      "selectedLineColor": "#FF7F50",
+      "paths": [
+        {
+          "lat": 37.41437827747645,
+          "lng": 127.12815396008229
+        },
+        {
+          "lat": 37.41454238170551,
+          "lng": 127.12636945685163
+        },
+        {
+          "lat": 37.41591196359101,
+          "lng": 127.1263378689661
+        },
+        {
+          "lat": 37.41606353359751,
+          "lng": 127.12782923809988
+        },
+        {
+          "lat": 37.41437827747645,
+          "lng": 127.12815396008229
+        }
+      ],
+      "totalDistance": 633.3771116720152,
+      "totalWalkkTime": 9
+    },
+    {
+      "id": "8f7cf422-42cb-4a43-bbbd-cf3fc27a533f",
+      "nickname": "이매동꼬부기",
+      "routeName": "ㅇㄹ",
+      "address": "ㅇㄹ",
+      "description": "ㅇㄹ",
+      "selectedPuppy": "smallPuppy",
+      "selectedLineColor": "#ffd750",
+      "paths": [
+        {
+          "lat": 37.41831630682432,
+          "lng": 127.12761843041503
+        },
+        {
+          "lat": 37.418011645836515,
+          "lng": 127.12604768397723
+        },
+        {
+          "lat": 37.41620897279539,
+          "lng": 127.12664336914685
+        },
+        {
+          "lat": 37.41681874117176,
+          "lng": 127.12934424398296
+        },
+        {
+          "lat": 37.41831630682432,
+          "lng": 127.12761843041503
+        }
+      ],
+      "totalDistance": 824.2409309462346,
+      "totalWalkkTime": 12
+    },
+    {
+      "id": "useruser",
+      "nickname": "이매동꼬부기",
+      "routeName": "ㅋㅋㅋㅋ",
+      "address": "ㅋㅋㅋㅋ",
+      "description": "ㅋㅋㅋㅋ",
+      "selectedPuppy": "smallPuppy",
+      "selectedLineColor": "#FF7F50",
+      "paths": [
+        {
+          "lat": 37.412698109976304,
+          "lng": 127.1320368585163
+        },
+        {
+          "lat": 37.413132950752434,
+          "lng": 127.12991399601748
+        },
+        {
+          "lat": 37.411574128924826,
+          "lng": 127.12996778217776
+        },
+        {
+          "lat": 37.410995212693265,
+          "lng": 127.13201127850071
+        },
+        {
+          "lat": 37.412698109976304,
+          "lng": 127.1320368585163
+        }
+      ],
+      "totalDistance": 748.0955163083835,
+      "totalWalkkTime": 11,
+      "RouteId": "f2360272-d42a-44b2-9acd-767c4e9b28d1"
+    },
+    {
+      "id": "1e9afe69-2fdd-463e-aeb9-d390885ab69a",
+      "userId": "useruser",
+      "nickname": "이매동꼬부기",
+      "routeName": "fdfdfdff",
+      "address": "dfdfdf",
+      "description": "dfdfd",
+      "selectedPuppy": "smallPuppy",
+      "selectedLineColor": "#FF7F50",
+      "paths": [
+        {
+          "lat": 37.41579912657686,
+          "lng": 127.13067545188137
+        },
+        {
+          "lat": 37.415710700664064,
+          "lng": 127.12915030194418
+        },
+        {
+          "lat": 37.41443056408357,
+          "lng": 127.12978068422812
+        },
+        {
+          "lat": 37.41471691678853,
+          "lng": 127.13156596519754
+        },
+        {
+          "lat": 37.41579912657686,
+          "lng": 127.13067545188137
+        }
+      ],
+      "totalDistance": 592.8909393957133,
+      "totalWalkkTime": 8,
+      "RouteId": "fcefb81e-2eb8-4be0-aa8a-f39da142a2c2"
+    }
+  ]
 }

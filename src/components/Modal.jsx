@@ -4,7 +4,7 @@ import CanvasComponent from "../pages/CanvasComponent";
 import html2canvas from "html2canvas";
 import logo from "../assets/logo.png";
 
-const Modal = ({ user, onClose }) => {
+const Modal = ({ user, onClose, onRouteDeleted }) => {
   const [userRoutes, setUserRoutes] = useState([]); // 사용자 경로 상태
   const refs = useRef([]);
 
@@ -28,7 +28,7 @@ const Modal = ({ user, onClose }) => {
     };
 
     checkUserRoutes();
-  }, [user.id]); // user.id가 변경될 때마다 실행
+  }, [user.id]);
 
   const onClickDownloadButton = (index) => {
     const target = refs.current[index];
@@ -46,13 +46,14 @@ const Modal = ({ user, onClose }) => {
   };
 
   const handleDelete = async (routeId) => {
-    console.log("Deleting route with ID:", routeId);
     try {
       await getDeleteRouteInfo(routeId);
       setUserRoutes((prevRoutes) => {
         const updatedRoutes = prevRoutes.filter((route) => route.id !== routeId);
+        alert("몽글로드가 삭제되었습니다.");
         return updatedRoutes;
       });
+      onRouteDeleted();
     } catch (error) {
       console.error("삭제 실패:", error);
       alert("삭제 실패");

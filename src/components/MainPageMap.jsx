@@ -11,6 +11,7 @@ const MainPageMap = ({ center }) => {
   const [overlayPositions, setOverlayPositions] = useState([]);
   const [routeNames, setRouteNames] = useState([]);
   const [selectedLineColor, setSelectedLineColor] = useState([]);
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     getGeoLocation();
@@ -43,7 +44,11 @@ const MainPageMap = ({ center }) => {
     };
 
     getRouteData();
-  }, [getGeoLocation]);
+  }, [getGeoLocation, refresh]);
+
+  const handleRouteDeleted = () => {
+    setRefresh((prev) => prev + 1);
+  };
 
   const handleMapDragEnd = (map) => {
     const lat = map.getCenter().getLat();
@@ -62,7 +67,7 @@ const MainPageMap = ({ center }) => {
           onDragEnd={handleMapDragEnd}
         >
           <div className="absolute top-0 left-0 z-10 p-4 w-full">
-            <Nav className="w-full" />
+            <Nav className="w-full" onRouteDeleted={handleRouteDeleted} />
           </div>
 
           <div className="absolute bottom-0 right-0 z-10 p-4 w-full">

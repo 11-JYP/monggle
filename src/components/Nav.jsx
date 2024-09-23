@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 import Modal from "./Modal";
 
-const Nav = () => {
+const Nav = ({ onRouteDeleted }) => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const modalBackground = useRef();
@@ -71,7 +71,7 @@ const Nav = () => {
             }
           }}
         >
-          <Modal user={user} onClose={() => setModalOpen(false)} />
+          <Modal user={user} onClose={() => setModalOpen(false)} onRouteDeleted={onRouteDeleted} />
         </div>
       )}
     </>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { getRouteInfo } from "../api/pathDataSave";
+import { getDeleteRouteInfo, getRouteInfo } from "../api/pathDataSave";
 import CanvasComponent from "../pages/CanvasComponent";
 import html2canvas from "html2canvas";
 import logo from "../assets/logo.png";
@@ -7,6 +7,7 @@ import logo from "../assets/logo.png";
 const Modal = ({ user, onClose }) => {
   const [userRoutes, setUserRoutes] = useState([]); // 사용자 경로 상태
   const refs = useRef([]);
+
   useEffect(() => {
     const checkUserRoutes = async () => {
       try {
@@ -15,6 +16,7 @@ const Modal = ({ user, onClose }) => {
         // 저장된 경로 정보에서 id 비교
         const filteredRoutes = savedRoutes.filter((route) => route.userId === user.id);
         setUserRoutes(filteredRoutes); // 사용자 경로 상태 업데이트
+
         if (filteredRoutes.length > 0) {
           console.log("사용자의 저장된 경로가 있습니다:", filteredRoutes);
         } else {
@@ -43,6 +45,20 @@ const Modal = ({ user, onClose }) => {
     });
   };
 
+  const handleDelete = async (routeId) => {
+    console.log("Deleting route with ID:", routeId);
+    try {
+      await getDeleteRouteInfo(routeId);
+      setUserRoutes((prevRoutes) => {
+        const updatedRoutes = prevRoutes.filter((route) => route.id !== routeId);
+        return updatedRoutes;
+      });
+    } catch (error) {
+      console.error("삭제 실패:", error);
+      alert("삭제 실패");
+    }
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 font-Uhbee">
       <div className="relative bg-white py-4 px-10 rounded w-[800px] h-[500px] ">
@@ -68,6 +84,15 @@ const Modal = ({ user, onClose }) => {
                   ref={(el) => (refs.current[index] = el)}
                   onClick={() => onClickDownloadButton(index)}
                 >
+                  <button
+                    className="absolute top-0 right-0 text-[12px] mb-2 z-10"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDelete(route.id);
+                    }}
+                  >
+                    삭제
+                  </button>
                   <div className="absolute bottom-0 left-0 p-2 bg-white opacity-80 w-full font-sans leading-5 ">
                     <h3 className="pb-1 font-extrabold">{route.routeName}</h3>
                     <p className="pb-1 text-sm">{route.description}</p>

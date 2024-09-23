@@ -143,7 +143,7 @@ const MainPageSide = ({ updateMapCenter }) => {
             >
               <h1 className="font-bold text-secondary-200 text-lg py-3 px-4 font-Uhbee">{info.routeName}</h1>
               <p className="py-2 px-4">{info.address}</p>
-              <span className="text-gray-600 text-sm px-4">{info.description}</span>
+              <span className="text-gray-600 text-sm px-4 inline-block">{info.description}</span>
               <p>{info.region}</p>
               <div className="bg-secondary-100 flex justify-center gap-4 p-4 mt-2 rounded-b-md font-bold text-secondary-200">
                 <span className="inline-block">총 거리 : {Math.floor(info.totalDistance)} m</span>

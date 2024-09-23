@@ -13,7 +13,7 @@ const Modal = ({ user, onClose }) => {
         const savedRoutes = await getRouteInfo(); // 저장된 경로 정보 가져오기
 
         // 저장된 경로 정보에서 id 비교
-        const filteredRoutes = savedRoutes.filter((route) => route.id === user.id);
+        const filteredRoutes = savedRoutes.filter((route) => route.id === user.userId);
         setUserRoutes(filteredRoutes); // 사용자 경로 상태 업데이트
 
         if (filteredRoutes.length > 0) {

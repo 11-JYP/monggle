@@ -13,9 +13,8 @@ const Modal = ({ user, onClose }) => {
         const savedRoutes = await getRouteInfo(); // 저장된 경로 정보 가져오기
 
         // 저장된 경로 정보에서 id 비교
-        const filteredRoutes = savedRoutes.filter((route) => route.id === user.userId);
+        const filteredRoutes = savedRoutes.filter((route) => route.userId === user.id);
         setUserRoutes(filteredRoutes); // 사용자 경로 상태 업데이트
-
         if (filteredRoutes.length > 0) {
           console.log("사용자의 저장된 경로가 있습니다:", filteredRoutes);
         } else {
